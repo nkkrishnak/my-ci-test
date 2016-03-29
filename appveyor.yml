@@ -1,8 +1,14 @@
-# uses msys or cygwin for bash, wget, unzip, bzip2, etc
-# The python package wget is another option
+# Uses Cygwin or MSYS (1.0 or 2.0) for bash, unzip, bzip2, wget, etc.
+# If wget binary is not found, the python package wget is used
+
 
 init:
-  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\MinGW\\msys\\1.0\\bin"
+  # Add any of the following:
+  # 1. C:\\cygwin\\bin
+  # 2. C:\\cygwin64
+  # 3. C:\\MinGW\\msys\\1.0\\bin
+  # 4. C:\\msys64
+  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\msys64"
   - "ECHO PATH=%PATH%"
   - bash --version
 

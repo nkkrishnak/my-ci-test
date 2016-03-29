@@ -3,25 +3,32 @@
 # Check dependencies
 WGET=`which wget`
 UNZIP=`which unzip`
-BZIP2=`which bzip2`
 BUNZIP2=`which bunzip2`
+BZIP2=`which bzip2`
+SEVENZIP=`which 7z`
 
-if [ -z "$UNZIP" -o -z "$BZIP2" -o -z "$BUNZIP2" ]; then
-  echo Some of the needed binaries are missing
-  echo WGET=$WGET '(fallback python -m wget)'
-  echo UNZIP=$UNZIP
-  echo BZIP2=$BZIP2
-  echo BUNZIP2=$BUNZIP2
-  exit 1
+UNZIP=""
+
+if [ -z "$UNZIP" ]; then
+  if [ -z "$SEVENZIP" ]; then
+    echo "unzip and 7z are both missing; can not continue"
+    exit 1
+  else
+    echo "unzip missing; falling back to 7z x"
+    UNZIP="$SEVENZIP x"
+    BUNZIP2="$SEVENZIP x"
+  fi
 fi
 
 if [ -z "$WGET" ]; then
+  echo "wget missing; falling back to python -m wget"
   WGET="python -m wget"
 fi
+if [ -z "$UNZIP"
 
 CACHE_DIR=.cache/era_xml
 
-if [ -f $CACHE_DIR/ERA2010_journal_title_list.xml.bz2 -a -f $CACHE_DIR/ERA2012_journal_title_list.xml.bz2 ]; then
+if [ -n "$BUNZIP2" -a -f $CACHE_DIR/ERA2010_journal_title_list.xml.bz2 -a -f $CACHE_DIR/ERA2012_journal_title_list.xml.bz2 ]; then
   cp $CACHE_DIR/* .
   $BUNZIP2 *.xml.bz2
   exit 0
@@ -74,4 +81,8 @@ cp downloads/ERA2012JournalList.xml $CACHE_DIR/ERA2012_journal_title_list.xml
 
 cp $CACHE_DIR/* .
 
-$BZIP2 $CACHE_DIR/*
+if [ -n "$BZIP2" ]; then
+  $BZIP2 $CACHE_DIR/*
+else
+  rm $CACHE_DIR/*
+fi
