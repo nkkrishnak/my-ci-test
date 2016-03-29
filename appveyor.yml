@@ -2,8 +2,9 @@
 # The python package wget is another option
 
 init:
-  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\cygwin\bin"
+  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\MinGW\\msys\\1.0\\bin"
   - "ECHO PATH=%PATH%"
+  - bash --version
 
 install:
   - python -m pip install -r requirements.txt -r win-requirements.txt

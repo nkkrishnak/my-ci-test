@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Check dependencies
 WGET=`which wget`
 UNZIP=`which unzip`
 BZIP2=`which bzip2`
@@ -13,6 +14,7 @@ if [ -z "$UNZIP" -o -z "$BZIP2" -o -z "$BUNZIP2" ]; then
   echo BUNZIP2=$BUNZIP2
   exit 1
 fi
+
 if [ -z "$WGET" ]; then
   WGET="python -m wget"
 fi
