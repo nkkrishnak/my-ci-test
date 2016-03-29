@@ -8,3 +8,5 @@ build: off
 
 test_script:
   - cmd: C:/cygwin/bin/bash.exe -x test.sh
+  - cmd: xsltproc --output ERA2010_journal_title_list.xml era_journal_list_2010_tidy.xsl ERA2010_journal_title_list.xml.orig
+  - cmd: diff -uw ERA2010_journal_title_list.xml.orig ERA2010_journal_title_list.xml

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rankedJournalListImport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<rankedJournalList>
+		<rankedJournal>
+			<eraIdentifier>35413</eraIdentifier>
+			<title>Australian Administrative Law</title>
+			<journalRank>B</journalRank>
+			<fieldsOfResearch>
+				<fieldOfResearch forCode="1801" forName="Law"/>
+			</fieldsOfResearch>
+			<issns>
+				<issn issnCode="0816-3030"/>
+			</issns>
+		</rankedJournal>
+		<rankedJournal>
+			<eraIdentifier>40652</eraIdentifier>
+			<title>Australian and New Zealand 
+Journal of Organisational Psychology</title>
+			<journalRank>Not ranked</journalRank>
+			<fieldsOfResearch>
+				<fieldOfResearch forCode="1701" forName="Psychology"/>
+			</fieldsOfResearch>
+			<issns>
+				<issn issnCode="1835-7601"/>
+			</issns>
+		</rankedJournal>
+        </rankedJournalList>
+</rankedJournalListImport>
