@@ -1,10 +1,19 @@
 #!/bin/sh
 
+WGET=`which wget`
+UNZIP=`which unzip`
+BUNZIP2=`which bunzip2`
+BZIP2=`which bzip2`
+
+echo WGET=$WGET
+echo UNZIP=$UNZIP
+echo BZIP2=$BZIP2
+
 CACHE_DIR=.cache/era_xml
 
 if [ -f $CACHE_DIR/ERA2010_journal_title_list.xml.bz2 -a -f $CACHE_DIR/ERA2012_journal_title_list.xml.bz2 ]; then
   cp $CACHE_DIR/* .
-  bunzip2 *.xml.bz2
+  $BUNZIP2 *.xml.bz2
   exit 0
 fi
 
@@ -13,11 +22,11 @@ fi
 mkdir downloads
 cd downloads
 
-wget http://content.webarchive.nla.gov.au/gov/wayback/20120317002747/http://www.arc.gov.au/zip/ERA2010_tech_pack.zip
+$WGET http://content.webarchive.nla.gov.au/gov/wayback/20120317002747/http://www.arc.gov.au/zip/ERA2010_tech_pack.zip
 
 mkdir ERA2010_tech_pack
 cd ERA2010_tech_pack
-unzip ../ERA2010_tech_pack.zip
+$UNZIP ../ERA2010_tech_pack.zip
 cd ..
 
 # The 2012 tech pack can be obtained from here, and it contains the journal list in XSLX format
@@ -29,7 +38,7 @@ cd ..
 # cd ..
 
 # However we can download only the journal list
-wget http://content.webarchive.nla.gov.au/gov/wayback/20140212052430/http://www.arc.gov.au/xls/era12/ERA2012JournalList.xlsx
+$WGET http://content.webarchive.nla.gov.au/gov/wayback/20140212052430/http://www.arc.gov.au/xls/era12/ERA2012JournalList.xlsx
 
 # We could extract the xlsx, and extract the data that way
 # mkdir ERA2012_journal_list
@@ -55,4 +64,4 @@ cp downloads/ERA2012JournalList.xml $CACHE_DIR/ERA2012_journal_title_list.xml
 
 cp $CACHE_DIR/* .
 
-bzip2 $CACHE_DIR/*
+$BZIP2 $CACHE_DIR/*
