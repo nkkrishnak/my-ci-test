@@ -1,5 +1,8 @@
+# uses msys or cygwin for bash, wget, etc
+# The python package wget is another option
+
 init:
-  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\cygwin\bin"
+  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\MinGW\\msys\\1.0\\bin;C:\\cygwin\bin"
   - "ECHO PATH=%PATH%"
 
 install:
