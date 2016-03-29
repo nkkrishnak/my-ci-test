@@ -2,7 +2,7 @@
 # The python package wget is another option
 
 init:
-  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\MinGW\\msys\\1.0\\bin;C:\\cygwin\bin"
+  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\cygwin\bin"
   - "ECHO PATH=%PATH%"
 
 install:
@@ -32,5 +32,5 @@ artifacts:
     name: Raw data fetched and converted to XML
   - path: ERA2010_journal_title_list.xml
     name: Cleaned 2010 XML
-  - path: '*.sql'
+  - path: '*201*s.sql'
     name: Schema (Oracle syntax) and data files
