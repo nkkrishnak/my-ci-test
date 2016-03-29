@@ -27,7 +27,6 @@ test_script:
 cache:
   - .cache/era_xml -> fetch.sh
 
-
 artifacts:
   - path: .cache/era_xml
     name: Raw data fetched and converted to XML
