@@ -3,7 +3,7 @@ init:
 
 install:
   - cmd: python -m pip install -r requirements.txt
-  - cmd: dir C:/Python27/Scripts
+  - "dir c:\Python27\Scripts"
 
 build: off
 
