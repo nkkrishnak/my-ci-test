@@ -1,6 +1,6 @@
-# Uses Cygwin or MSYS (1.0 or 2.0) for bash, unzip, bzip2, wget, etc.
+# Uses Cygwin or MSYS (1.0 or 2.0) for bash, unzip, bzip2, wget, sed, etc.
+# Python and Perl also needed
 # If wget binary is not found, the python package wget is used
-
 
 init:
   # Add any of the following:

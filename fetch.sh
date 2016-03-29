@@ -24,7 +24,6 @@ if [ -z "$WGET" ]; then
   echo "wget missing; falling back to python -m wget"
   WGET="python -m wget"
 fi
-if [ -z "$UNZIP"
 
 CACHE_DIR=.cache/era_xml
 
