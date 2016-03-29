@@ -9,6 +9,6 @@ build: off
 
 test_script:
   - cmd: C:/cygwin/bin/bash.exe -x test.sh
-  - cmd: C:/Python27/Scripts/lxmlproc.exe --output ERA2010_journal_title_list.xml era_journal_list_2010_tidy.xsl ERA2010_journal_title_list.xml.orig
+  - cmd: python C:/Python27/Scripts/lxmlproc --output ERA2010_journal_title_list.xml era_journal_list_2010_tidy.xsl ERA2010_journal_title_list.xml.orig
   - cmd: C:/cygwin/bin/cat.exe ERA2010_journal_title_list.xml
   - cmd: diff -uw ERA2010_journal_title_list.xml.orig ERA2010_journal_title_list.xml
