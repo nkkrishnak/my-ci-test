@@ -6,7 +6,8 @@ init:
   - "ECHO PATH=%PATH%"
 
 install:
-  - cmd: python -m pip install -r requirements.txt -r win-requirements.txt
+  - python -m pip install -r requirements.txt -r win-requirements.txt
+  - "DIR c:\\Python27\\Scripts"
 
 build: off
 

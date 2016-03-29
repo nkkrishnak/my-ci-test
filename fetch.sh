@@ -2,12 +2,17 @@
 
 WGET=`which wget`
 UNZIP=`which unzip`
-BUNZIP2=`which bunzip2`
 BZIP2=`which bzip2`
+BUNZIP2=`which bunzip2`
 
-echo WGET=$WGET
-echo UNZIP=$UNZIP
-echo BZIP2=$BZIP2
+if [ -z "$WGET" -o -z "$UNZIP" -o -z "$BZIP2" -o -z "$BUNZIP2" ]; then
+  echo Some of the needed binaries are missing
+  echo WGET=$WGET
+  echo UNZIP=$UNZIP
+  echo BZIP2=$BZIP2
+  echo BUNZIP2=$BUNZIP2
+  exit 1
+fi
 
 CACHE_DIR=.cache/era_xml
 
