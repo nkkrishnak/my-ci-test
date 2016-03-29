@@ -5,13 +5,16 @@ UNZIP=`which unzip`
 BZIP2=`which bzip2`
 BUNZIP2=`which bunzip2`
 
-if [ -z "$WGET" -o -z "$UNZIP" -o -z "$BZIP2" -o -z "$BUNZIP2" ]; then
+if [ -z "$UNZIP" -o -z "$BZIP2" -o -z "$BUNZIP2" ]; then
   echo Some of the needed binaries are missing
-  echo WGET=$WGET
+  echo WGET=$WGET '(fallback python -m wget)'
   echo UNZIP=$UNZIP
   echo BZIP2=$BZIP2
   echo BUNZIP2=$BUNZIP2
   exit 1
+fi
+if [ -z "$WGET" ]; then
+  WGET="python -m wget"
 fi
 
 CACHE_DIR=.cache/era_xml
