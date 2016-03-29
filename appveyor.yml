@@ -18,7 +18,7 @@ test_script:
 
   # Remove the duplicate disciplines and the misplaced new lines from the ERA2010 journal list
   - mv ERA2010_journal_title_list.xml ERA2010_journal_title_list.xml.orig
-  - lxmlproc --output ERA2010_journal_title_list.xml era_journal_list_2010_tidy.xsl ERA2010_journal_title_list.xml.orig
+  - python C:/Python27/Scripts/lxmlproc --output ERA2010_journal_title_list.xml era_journal_list_2010_tidy.xsl ERA2010_journal_title_list.xml.orig
 
   # Convert the xml to sql insert statements
   - perl era_journal_list_sql.pl ERA2010_journal_title_list.xml era2010 oracle > ERA2010_journal_title_list.sql
