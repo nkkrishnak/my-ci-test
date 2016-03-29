@@ -2,7 +2,7 @@ init:
   - "ECHO PATH=%PATH%"
 
 install:
-  - cmd: pip install -r requirements.txt
+  - cmd: python -m pip install -r requirements.txt
 
 build: off
 
