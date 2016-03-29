@@ -13,18 +13,16 @@ build: off
 test_script:
   - bash -x fetch.sh
   # Create two schema scripts with tables prefixed era2010 and era2012
-  - sed -re 's/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2010_journal\2/g' schema.sql > schema2010.sql
-  - sed -re 's/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2012_journal\2/g' schema.sql > schema2012.sql
+  - "sed -re 's/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2010_journal\2/g' schema.sql > schema2010.sql"
+  - "sed -re 's/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2012_journal\2/g' schema.sql > schema2012.sql"
 
   # Remove the duplicate disciplines and the misplaced new lines from the ERA2010 journal list
   - mv ERA2010_journal_title_list.xml ERA2010_journal_title_list.xml.orig
   - lxmlproc --output ERA2010_journal_title_list.xml era_journal_list_2010_tidy.xsl ERA2010_journal_title_list.xml.orig
-  - diff -uw ERA2010_journal_title_list.xml.orig ERA2010_journal_title_list.xml || true # || true ignores the exit code from diff
 
   # Convert the xml to sql insert statements
-  - perl era_journal_list_sql.pl ERA2010_journal_title_list.xml era2010 $DB > ERA2010_journal_title_list.sql
-  - perl era_journal_list_sql.pl ERA2012_journal_title_list.xml era2012 $DB > ERA2012_journal_title_list.sql
-  - ls -l *.sql
+  - perl era_journal_list_sql.pl ERA2010_journal_title_list.xml era2010 oracle > ERA2010_journal_title_list.sql
+  - perl era_journal_list_sql.pl ERA2012_journal_title_list.xml era2012 oracle > ERA2012_journal_title_list.sql
 
 cache:
   - .cache/era_xml -> fetch.sh
