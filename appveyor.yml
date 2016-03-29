@@ -13,8 +13,8 @@ build: off
 test_script:
   - bash -x fetch.sh
   # Create two schema scripts with tables prefixed era2010 and era2012
-  - "sed -re 's/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2010_journal\2/g' schema.sql > schema2010.sql"
-  - "sed -re 's/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2012_journal\2/g' schema.sql > schema2012.sql"
+  - 'sed -re "s/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2010_journal\2/g" schema.sql > schema2010.sql'
+  - 'sed -re "s/(^CREATE TABLE|REFERENCES|CONSTRAINT) journal([_ ])/\1 era2012_journal\2/g" schema.sql > schema2012.sql'
 
   # Remove the duplicate disciplines and the misplaced new lines from the ERA2010 journal list
   - mv ERA2010_journal_title_list.xml ERA2010_journal_title_list.xml.orig
