@@ -1,0 +1,10 @@
+init:
+  - "ECHO PATH=%PATH%"
+
+install:
+  - cmd: pip install -r requirements.txt
+
+build: off
+
+test_script:
+  - cmd: C:/cygwin/bin/bash.exe -x test.sh
