@@ -8,7 +8,7 @@ init:
   # 2. C:\\cygwin64
   # 3. C:\\MinGW\\msys\\1.0\\bin
   # 4. C:\\msys64
-  - "SET PATH=%PATH%;c:\\Python27\\Scripts;C:\\msys64"
+  - "SET PATH=%PATH%;C:\\msys64;c:\\Python27\\Scripts"
   - "ECHO PATH=%PATH%"
   - bash --version
 

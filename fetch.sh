@@ -9,7 +9,7 @@ BZIP2=`which bzip2`
 
 SEVENZIP=`which 7z`
 
-UNZIP=""
+BZIP2=""
 
 if [ -z "$UNZIP" ]; then
   if [ -z "$SEVENZIP" ]; then
