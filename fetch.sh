@@ -3,8 +3,10 @@
 # Check dependencies
 WGET=`which wget`
 UNZIP=`which unzip`
+UNZIP_EXTRACT_ARG=""
 BUNZIP2=`which bunzip2`
 BZIP2=`which bzip2`
+
 SEVENZIP=`which 7z`
 
 UNZIP=""
@@ -15,9 +17,15 @@ if [ -z "$UNZIP" ]; then
     exit 1
   else
     echo "unzip missing; falling back to 7z x"
-    UNZIP="$SEVENZIP x"
-    BUNZIP2="$SEVENZIP x"
+    UNZIP="$SEVENZIP"
+    UNZIP_EXTRACT_ARG="x"
   fi
+fi
+
+# If the bzip pair are missing; use a noop instead
+if [ -z "$BUNZIP2" -o -z "$BZIP2" ]; then
+  BUNZIP2=true
+  BZIP2=true
 fi
 
 if [ -z "$WGET" ]; then
@@ -27,7 +35,7 @@ fi
 
 CACHE_DIR=.cache/era_xml
 
-if [ -n "$BUNZIP2" -a -f $CACHE_DIR/ERA2010_journal_title_list.xml.bz2 -a -f $CACHE_DIR/ERA2012_journal_title_list.xml.bz2 ]; then
+if [ -f $CACHE_DIR/ERA2010_journal_title_list.xml* -a -f $CACHE_DIR/ERA2012_journal_title_list.xml* ]; then
   cp $CACHE_DIR/* .
   "$BUNZIP2" *.xml.bz2
   exit 0
@@ -38,11 +46,11 @@ fi
 mkdir downloads
 cd downloads
 
-"$WGET" http://content.webarchive.nla.gov.au/gov/wayback/20120317002747/http://www.arc.gov.au/zip/ERA2010_tech_pack.zip
+$WGET http://content.webarchive.nla.gov.au/gov/wayback/20120317002747/http://www.arc.gov.au/zip/ERA2010_tech_pack.zip
 
 mkdir ERA2010_tech_pack
 cd ERA2010_tech_pack
-"$UNZIP" ../ERA2010_tech_pack.zip
+"$UNZIP" $UNZIP_EXTRACT_ARG ../ERA2010_tech_pack.zip
 cd ..
 
 # The 2012 tech pack can be obtained from here, and it contains the journal list in XSLX format
@@ -54,7 +62,7 @@ cd ..
 # cd ..
 
 # However we can download only the journal list
-"$WGET" http://content.webarchive.nla.gov.au/gov/wayback/20140212052430/http://www.arc.gov.au/xls/era12/ERA2012JournalList.xlsx
+$WGET http://content.webarchive.nla.gov.au/gov/wayback/20140212052430/http://www.arc.gov.au/xls/era12/ERA2012JournalList.xlsx
 
 # We could extract the xlsx, and extract the data that way
 # mkdir ERA2012_journal_list
@@ -80,8 +88,4 @@ cp downloads/ERA2012JournalList.xml $CACHE_DIR/ERA2012_journal_title_list.xml
 
 cp $CACHE_DIR/* .
 
-if [ -n "$BZIP2" ]; then
-  "$BZIP2" $CACHE_DIR/*
-else
-  rm $CACHE_DIR/*
-fi
+"$BZIP2" $CACHE_DIR/*
