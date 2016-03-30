@@ -9,6 +9,7 @@ BZIP2=`which bzip2`
 
 SEVENZIP=`which 7z`
 
+UNZIP=""
 BZIP2=""
 
 if [ -z "$UNZIP" ]; then
@@ -50,7 +51,7 @@ $WGET http://content.webarchive.nla.gov.au/gov/wayback/20120317002747/http://www
 
 mkdir ERA2010_tech_pack
 cd ERA2010_tech_pack
-"$UNZIP" $UNZIP_EXTRACT_ARG ../ERA2010_tech_pack.zip
+"$UNZIP" $UNZIP_EXTRACT_ARG ../ERA2010_tech_pack.zip code-table/XML-Format/ERA2010_journal_title_list.xml
 cd ..
 
 # The 2012 tech pack can be obtained from here, and it contains the journal list in XSLX format
