@@ -4,9 +4,9 @@ sudo: required
 matrix:
   include:
     - dist: precise
-      env: DIST=precise
+      env: MYDIST=precise
     - dist: trusty
-      env: DIST=trusty
+      env: MYDIST=trusty
 
 before_install:
   - printenv
