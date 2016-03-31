@@ -1,0 +1,14 @@
+language: ruby
+sudo: required
+
+matrix:
+  include:
+    - dist: precise
+      env: DIST=precise
+    - dist: trusty
+      env: DIST=trusty
+
+before_install:
+  - printenv
+  - ./download.sh
+  - ./install.sh
