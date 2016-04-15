@@ -1,8 +1,0 @@
-pyexcel
-pyexcel-xlsx
-git+https://github.com/pyexcel/pyexcel-text
-
-dicttoxml
-
-lxml
-lxmlproc
