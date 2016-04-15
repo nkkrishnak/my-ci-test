@@ -12,3 +12,4 @@ python:
 
 script:
   - python -c "import multiprocessing; print(multiprocessing.cpu_count());"
+  - python -c "import os; print(os.cpu_count());"
