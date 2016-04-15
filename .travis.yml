@@ -14,4 +14,5 @@ script:
   - python -c "import multiprocessing; print(multiprocessing.cpu_count());"
   - pip install psutil
   - python -c "import psutil; print(psutil.cpu_count(True), psutil.cpu_count(False));"
+  - python -c "import psutil; print(psutil.Process().cpu_affinity());"
   - python -c "import os; print(os.cpu_count());"
