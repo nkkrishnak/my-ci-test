@@ -1,23 +1,8 @@
 language: python
 
-matrix:
-  include:
-    - dist: precise
-      env: DIST=precise
-      sudo: false
-
-    - dist: precise
-      env: DIST=precise
-      sudo: required
-
-    - dist: trusty
-      env: DIST=trusty
-      sudo: false
-
-
-    - dist: trusty
-      env: DIST=trusty
-      sudo: required
+python:
+  - PyPy
+  - PyPy3
 
 script:
   - env
