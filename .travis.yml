@@ -19,3 +19,5 @@ script:
     - env
     - tox
     - ls -l /usr/bin/sudo
+    - SUDO_ENABLED=`test -u /usr/bin/sudo && echo 1`
+    - echo $SUDO_ENABLED
