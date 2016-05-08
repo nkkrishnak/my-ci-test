@@ -18,4 +18,4 @@ install:
 script:
     - env
     - tox
-    - ls -l /bin/sudo
+    - ls -l /usr/bin/sudo
