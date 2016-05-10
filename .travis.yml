@@ -17,7 +17,8 @@ install:
 
 script:
     - env
+    - python --version
     - tox
     - ls -l /usr/bin/sudo
-    - SUDO_ENABLED=`test -u /usr/bin/sudo && echo 1 || echo 0`
+    - SUDO_ENABLED=`test -u /usr/bin/sudo || echo $?`
     - echo $SUDO_ENABLED
