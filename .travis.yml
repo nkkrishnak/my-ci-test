@@ -23,6 +23,7 @@ matrix:
       sudo: false
 
 install:
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "3.2" ]]; then pip install 'virtualenv<14' ; fi
     - travis_retry pip install tox
 
 script:
