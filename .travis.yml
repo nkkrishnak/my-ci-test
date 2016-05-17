@@ -12,6 +12,11 @@ matrix:
       env: TOXENV=pypy3
       sudo: false
 
+    - python: 3.3
+      dist: precise
+      env: TOXENV=py33
+      sudo: false
+
 install:
     - travis_retry pip install tox
 
