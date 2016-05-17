@@ -22,4 +22,5 @@ script:
     - ls -l /usr/bin/sudo
     - SUDO_ENABLED=`test -u /usr/bin/sudo || echo $?`
     - echo $SUDO_ENABLED
+    - wget --help
     - wget "http://www.proofwiki.org/wiki/$1"
