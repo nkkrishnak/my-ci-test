@@ -4,12 +4,17 @@ matrix:
   include:
     - python: 3.4
       dist: precise
-      env: DIST=precise SUDO=required
+      env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1
+      sudo: false
+
+    - python: 3.4
+      dist: precise
+      env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1
       sudo: required
 
     - python: 3.4
       dist: trusty
-      env: DIST=trusty SUDO=required APT=debian-sid-openssl
+      env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1
       sudo: required
       addons:
         apt:
@@ -17,11 +22,6 @@ matrix:
             - debian-sid
           packages:
             - openssl
-
-    - python: 3.4
-      dist: precise
-      env: DIST=precise SUDO=false
-      sudo: false
 
     - python: 3.4
       dist: precise
@@ -34,10 +34,16 @@ matrix:
           packages:
             - openssl
 
-script:
+before_script:
     - env
     - python --version
-    - pip install "requests[security]"
-    - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
     - wget --version
-    - wget "http://www.proofwiki.org/wiki/$1"
+
+script:
+    - if [[ "$TEST_PYTHON" == 1 ]]; then
+        pip install "requests[security]" ;
+        python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);" ;
+      fi
+    - if [[ "$TEST_WGET" == 1 ]]; then
+        wget "http://www.proofwiki.org/wiki/$1" ;
+      fi
