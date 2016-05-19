@@ -26,6 +26,8 @@ install:
     - if [[ "$TRAVIS_PYTHON_VERSION" == "3.2" ]]; then pip install 'virtualenv<14' ; fi
     - travis_retry pip install tox
 
+# to upgrade everything: sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade
+
 script:
     - env
     - python --version
@@ -35,7 +37,7 @@ script:
     - echo $NO_SUDO
     - if [[ "$NO_SUDO" != 1 ]]; then
         sudo apt-get -qq update ;
-        sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
+        sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade curl ;
       fi
     - pip install requests
     - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
