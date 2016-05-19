@@ -35,7 +35,7 @@ script:
     - echo $NO_SUDO
     - if [[ "$NO_SUDO" != 1 ]]; then
         sudo apt-get -qq update ;
-        sudo apt-get upgrade ;
+        sudo apt-get -yf upgrade ;
       fi
     - pip install requests
     - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
