@@ -6,6 +6,7 @@ addons:
       - debian-sid
     packages:
       - openssl
+      - libtasn1
 #      - libgnutls-openssl27
 #      - libgnutls26
 #      - libgnutlsxx27
@@ -47,7 +48,7 @@ script:
     - echo $NO_SUDO
     - if [[ "$NO_SUDO" != 1 ]]; then
         sudo apt-get -qq update ;
-        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install openssl ;
+        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install openssl libtasn1 ;
       fi
     - pip install "requests[security]"
     - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
