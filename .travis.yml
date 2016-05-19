@@ -31,9 +31,9 @@ script:
     - python --version
     - tox
     - ls -l /usr/bin/sudo
-    - SUDO_ENABLED=`test -u /usr/bin/sudo || echo $?`
-    - echo $SUDO_ENABLED
-    - if [[ "$SUDO_ENABLED" == 1 ]]; then
+    - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
+    - echo $NO_SUDO
+    - if [[ "$NO_SUDO" != 1 ]]; then
         sudo apt-get -qq update ;
         sudo apt-get upgrade ;
       fi
