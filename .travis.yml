@@ -6,7 +6,7 @@ addons:
       - debian-sid
     packages:
       - openssl
-#      - libgnutls-openssl27
+      - libgnutls-openssl27
 #      - libgnutls26
 #      - libgnutlsxx27
 
@@ -17,7 +17,7 @@ matrix:
       env: TOXENV=py34 DIST=precise SUDO=required
       sudo: required
 
-    - python: pypy3
+    - python: 3.5
       dist: trusty
       env: TOXENV=pypy3 DIST=trusty SUDO=required
       sudo: required
@@ -47,7 +47,7 @@ script:
     - echo $NO_SUDO
     - if [[ "$NO_SUDO" != 1 ]]; then
         sudo apt-get -qq update ;
-        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install openssl ;
+        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install openssl libgnutls-openssl27 ;
       fi
     - pip install "requests[security]"
     - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
