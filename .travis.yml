@@ -2,6 +2,8 @@ language: python
 
 addons:
   apt:
+    sources:
+      - debian-sid
     packages:
       - openssl
       - libgnutls-dev
