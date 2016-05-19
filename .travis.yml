@@ -3,7 +3,11 @@ language: python
 addons:
   apt:
     packages:
-      - curl
+      - openssl
+      - libgnutls-dev
+      - libgnutls-openssl27
+      - libgnutls26
+      - libgnutlsxx27
 
 matrix:
   include:
