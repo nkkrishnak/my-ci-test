@@ -33,7 +33,7 @@ script:
     - ls -l /usr/bin/sudo
     - SUDO_ENABLED=`test -u /usr/bin/sudo || echo $?`
     - echo $SUDO_ENABLED
-    - if [[ "$SUDO_ENABLED" == 1 && "$DIST" == "precise" ]]; then
+    - if [[ "$SUDO_ENABLED" == 1 ]]; then
         sudo apt-get -qq update ;
         sudo apt-get upgrade ;
       fi
