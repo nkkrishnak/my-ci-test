@@ -6,7 +6,6 @@ addons:
       - debian-sid
     packages:
       - openssl
-      - libgnutls-dev
       - libgnutls-openssl27
       - libgnutls26
       - libgnutlsxx27
