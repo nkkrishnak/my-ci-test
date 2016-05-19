@@ -22,12 +22,12 @@ matrix:
       env: TOXENV=pypy3 DIST=trusty SUDO=required
       sudo: required
 
-    - python: 3.3
+    - python: 3.5
       dist: precise
       env: TOXENV=py33 DIST=precise SUDO=false
       sudo: false
 
-    - python: 2.7
+    - python: 3.4
       dist: precise
       env: TOXENV=py27 DIST=precise SUDO=false
       sudo: false
