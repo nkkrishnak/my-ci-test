@@ -1,56 +1,43 @@
 language: python
 
-addons:
-  apt:
-    sources:
-      - debian-sid
-    packages:
-      - openssl
-      - libgcrypt11
-#      - libgnutls-openssl27
-#      - libgnutls26
-#      - libgnutlsxx27
-
 matrix:
   include:
     - python: 3.4
       dist: precise
-      env: TOXENV=py34 DIST=precise SUDO=required
+      env: DIST=precise SUDO=required
       sudo: required
 
-    - python: 3.5
+    - python: 3.4
       dist: trusty
-      env: TOXENV=pypy3 DIST=trusty SUDO=required
+      env: DIST=trusty SUDO=required APT=debian-sid-openssl
       sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
 
-    - python: 3.5
+    - python: 3.4
       dist: precise
-      env: TOXENV=py33 DIST=precise SUDO=false
+      env: DIST=precise SUDO=false
       sudo: false
 
     - python: 3.4
       dist: precise
-      env: TOXENV=py27 DIST=precise SUDO=false
+      env: DIST=precise SUDO=false APT=debian-sid-openssl
       sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
 
-install:
-    - if [[ "$TRAVIS_PYTHON_VERSION" == "3.2" ]]; then pip install 'virtualenv<14' ; fi
-    - travis_retry pip install tox
-
-# to upgrade everything: sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade
-# libgnutls-dev libgnutls-openssl27 libgnutls26 libgnutlsxx27
 script:
     - env
     - python --version
-    - tox
-    - ls -l /usr/bin/sudo
-    - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
-    - echo $NO_SUDO
-    - if [[ "$NO_SUDO" != 1 ]]; then
-        sudo apt-get -qq update ;
-        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install openssl libtasn1 ;
-      fi
     - pip install "requests[security]"
     - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
-    - wget --help
+    - wget --version
     - wget "http://www.proofwiki.org/wiki/$1"
