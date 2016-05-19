@@ -6,9 +6,9 @@ addons:
       - debian-sid
     packages:
       - openssl
-      - libgnutls-openssl27
-      - libgnutls26
-      - libgnutlsxx27
+#      - libgnutls-openssl27
+#      - libgnutls26
+#      - libgnutlsxx27
 
 matrix:
   include:
@@ -37,7 +37,7 @@ install:
     - travis_retry pip install tox
 
 # to upgrade everything: sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade
-
+# libgnutls-dev libgnutls-openssl27 libgnutls26 libgnutlsxx27
 script:
     - env
     - python --version
@@ -47,9 +47,9 @@ script:
     - echo $NO_SUDO
     - if [[ "$NO_SUDO" != 1 ]]; then
         sudo apt-get -qq update ;
-        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install libgnutls-dev libgnutls-openssl27 libgnutls26 libgnutlsxx27 openssl ;
+        sudo apt-get -yf -o Dpkg::Options::="--force-confold" install openssl ;
       fi
-    - pip install requests
+    - pip install "requests[security]"
     - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
     - wget --help
     - wget "http://www.proofwiki.org/wiki/$1"
