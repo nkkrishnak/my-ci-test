@@ -1,6 +1,6 @@
 env:
   global:
-    URL=https://www.proofwiki.org/wiki/Main_Page
+    URL=https://proofwiki.org/wiki/Main_Page
 
 matrix:
   include:
