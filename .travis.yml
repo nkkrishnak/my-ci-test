@@ -34,3 +34,4 @@ script:
     - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
     - echo $NO_SUDO
     - python -c "import platform; print(platform.linux_distribution());"
+    - python -c "import grp; print(any(x.gr_name == 'wheel' and 'travis' in x.gr_mem for x in grp.getgrall()))"
