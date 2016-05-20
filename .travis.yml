@@ -116,6 +116,13 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=precise SUDO=false APT=everything TEST_WGET=1 TEST_CURL=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
 before_script:
     - env
     - python --version
