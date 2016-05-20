@@ -1,25 +1,32 @@
-language: python
-os: linux
+env:
+  global:
+    URL=http://www.proofwiki.org/wiki/
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1
-      python: 3.4
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+      os: linux
       dist: precise
       sudo: false
-
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_WGET=1
+      language: python
       python: 3.4
+
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+      os: linux
       dist: trusty
       sudo: required
-
-    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1
+      language: python
       python: 3.4
+
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+      os: linux
       dist: precise
       sudo: required
+      language: python
+      python: 3.4
 
     - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1
-      python: 3.4
+      os: linux
       dist: trusty
       sudo: required
       addons:
@@ -28,9 +35,24 @@ matrix:
             - debian-sid
           packages:
             - openssl
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1 TEST_CURL=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - wget
+      language: python
+      python: 3.4
 
     - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1
-      python: 3.4
+      os: linux
       dist: precise
       sudo: false
       addons:
@@ -39,6 +61,21 @@ matrix:
             - debian-sid
           packages:
             - openssl
+      language: python
+      python: 3.4
+
+    - env: DIST=precise SUDO=false APT=debian-sid-wget TEST_WGET=1 TEST_CURL=1
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - wget
+      language: python
+      python: 3.4
 
 before_script:
     - env
@@ -48,8 +85,12 @@ before_script:
 script:
     - if [[ "$TEST_PYTHON" == 1 ]]; then
         pip install "requests[security]" ;
-        python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);" ;
+        python -c "import requests; print(requests.get('$URL').status_code);" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
-        wget "http://www.proofwiki.org/wiki/$1" ;
+        wget $URL ;
       fi
+    - if [[ "$TEST_CURL" == 1 ]]; then
+        curl -v $URL ;
+      fi
+
