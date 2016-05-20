@@ -123,6 +123,7 @@ before_script:
 
 install:
     - if [[ "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
+        sudo apt-get -qq update ;
         sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
       fi
     - if [[ "$TEST_PYTHON" == 1 ]]; then
