@@ -1,6 +1,6 @@
 env:
   global:
-    URL=http://www.proofwiki.org/wiki/
+    URL=https://www.proofwiki.org/wiki/Main_Page
 
 matrix:
   include:
@@ -93,4 +93,3 @@ script:
     - if [[ "$TEST_CURL" == 1 ]]; then
         curl -v $URL ;
       fi
-
