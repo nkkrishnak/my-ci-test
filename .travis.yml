@@ -4,21 +4,21 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1 TEST_CURL_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
       sudo: required
@@ -144,11 +144,6 @@ matrix:
       language: python
       python: 3.4
 
-before_script:
-    - env
-    - python --version
-    - wget --version
-
 install:
     - if [[ "$APT" == "everything-debian-sid-wget" || "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
         sudo apt-get -qq update ;
@@ -171,6 +166,13 @@ install:
     - if [[ "$TEST_PYTHON" == 1 || "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
         pip install "urllib3[secure]" "requests[security]" ;
       fi
+
+before_script:
+    - env
+    - python --version
+    - wget --version
+    - curl --version
+    - curl --help
 
 script:
     - if [[ "$TEST_PYTHON" == 1 ]]; then
