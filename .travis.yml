@@ -1,20 +1,26 @@
 language: python
+os: linux
 
 matrix:
   include:
-    - python: 3.4
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1
+      python: 3.4
       dist: precise
-      env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1
       sudo: false
 
-    - python: 3.4
-      dist: precise
-      env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_WGET=1
+      python: 3.4
+      dist: trusty
       sudo: required
 
-    - python: 3.4
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1
+      python: 3.4
+      dist: precise
+      sudo: required
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1
+      python: 3.4
       dist: trusty
-      env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1
       sudo: required
       addons:
         apt:
@@ -23,9 +29,9 @@ matrix:
           packages:
             - openssl
 
-    - python: 3.4
+    - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1
+      python: 3.4
       dist: precise
-      env: DIST=precise SUDO=false APT=debian-sid-openssl
       sudo: false
       addons:
         apt:
