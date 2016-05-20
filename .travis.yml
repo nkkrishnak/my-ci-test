@@ -4,7 +4,7 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -18,14 +18,14 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: precise
       sudo: required
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
@@ -155,8 +155,8 @@ install:
         sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
       fi
     - if [[ "$APT" == "everything-debian-sid-wget" ]]; then
-        curl -sSL "https://ftp-master.debian.org/keys/archive-key-7.0.asc" | sudo -E apt-key add -
-        echo "deb http://ftp.us.debian.org/debian unstable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+        curl -sSL "https://ftp-master.debian.org/keys/archive-key-7.0.asc" | sudo -E apt-key add - ;
+        echo "deb http://ftp.us.debian.org/debian unstable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null ;
         sudo apt-get -qq update ;
         sudo apt-get -yf install wget ;
       fi
@@ -184,4 +184,7 @@ script:
       fi
     - if [[ "$TEST_CURL" == 1 ]]; then
         curl -v $URL ;
+      fi
+    - if [[ "$TEST_CURL_EXPLICIT" == 1 ]]; then
+        curl -v --tlsv1.2 $URL ;
       fi
