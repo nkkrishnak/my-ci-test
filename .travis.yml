@@ -134,7 +134,7 @@ install:
         sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
       fi
     - if [[ "$TEST_PYTHON" == 1 || "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
-        pip install "requests[security]" ;
+        pip install "urllib3[secure]" "requests[security]" ;
       fi
 
 script:
