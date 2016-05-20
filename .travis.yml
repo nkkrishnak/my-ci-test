@@ -22,6 +22,11 @@ matrix:
       env: TOXENV=py27 DIST=precise SUDO=false
       sudo: false
 
+    - python: 2.6
+      dist: precise
+      env: TOXENV=py26 DIST=precise SUDO=false
+      sudo: false
+
 install:
     - if [[ "$TRAVIS_PYTHON_VERSION" == "3.2" ]]; then pip install 'virtualenv<14' ; fi
     - travis_retry pip install tox
@@ -35,4 +40,4 @@ script:
     - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
     - echo $NO_SUDO
     - python -c "import platform; print(platform.linux_distribution());"
-    - python -c "import grp; print(any(x.gr_name == 'wheel' and 'travis' in x.gr_mem for x in grp.getgrall()))"
+    - python -c "import os, stat; print(os.lstat('/usr/bin/sudo')[0] & stat.S_ISUID)"
