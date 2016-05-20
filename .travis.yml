@@ -4,7 +4,14 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
       sudo: false
@@ -79,7 +86,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=debian-sid-everything TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-everything
       os: linux
       dist: trusty
       sudo: required
@@ -90,7 +97,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
       sudo: false
@@ -103,7 +110,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=false APT=debian-sid-wget TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=false APT=debian-sid-wget
       os: linux
       dist: precise
       sudo: false
@@ -113,13 +120,6 @@ matrix:
             - debian-sid
           packages:
             - wget
-      language: python
-      python: 3.4
-
-    - env: DIST=precise SUDO=false APT=everything TEST_WGET=1 TEST_CURL=1
-      os: linux
-      dist: precise
-      sudo: false
       language: python
       python: 3.4
 
