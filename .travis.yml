@@ -4,28 +4,28 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
       sudo: required
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_CURL=1
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1
       os: linux
       dist: trusty
       sudo: required
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_WGET=1
+    - env: DIST=trusty SUDO=required TEST_WGET=1
       os: linux
       dist: trusty
       sudo: required
@@ -90,7 +90,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1
+    - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -126,13 +126,16 @@ install:
         sudo apt-get -qq update ;
         sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
       fi
-    - if [[ "$TEST_PYTHON" == 1 ]]; then
+    - if [[ "$TEST_PYTHON" == 1 || "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
         pip install "requests[security]" ;
       fi
 
 script:
     - if [[ "$TEST_PYTHON" == 1 ]]; then
         python -c "import requests; print(requests.get('$URL').status_code);" ;
+      fi
+    - if [[ "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
+        python -c "import ssl, urllib3; conn = urllib3.connection_from_url('$URL', ssl_version=ssl.PROTOCOL_TLSv1_2); r = conn.request('GET', '$URL'); print(r.status);" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
         wget $URL ;
