@@ -27,6 +27,7 @@ install:
     - travis_retry pip install tox
 
 script:
+    - id
     - env
     - python --version
     - tox
