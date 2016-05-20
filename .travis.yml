@@ -125,7 +125,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=debian-sid-everything BUILD=wget TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl BUILD=wget TEST_WGET=1
       os: linux
       dist: trusty
       sudo: required
@@ -133,6 +133,8 @@ matrix:
         apt:
           sources:
             - debian-sid
+          packages:
+            - openssl
       language: python
       python: 3.4
 
