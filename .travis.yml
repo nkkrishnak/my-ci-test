@@ -93,6 +93,20 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=trusty SUDO=required BUILD=wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=everything BUILD=wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
     - env: DIST=trusty SUDO=required APT=debian-sid-everything
       os: linux
       dist: trusty
@@ -145,6 +159,14 @@ install:
         echo "deb http://ftp.us.debian.org/debian unstable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
         sudo apt-get -qq update ;
         sudo apt-get -yf install wget ;
+      fi
+    - if [[ "$BUILD" == "wget" ]]; then
+        wget http://ftp.gnu.org/gnu/wget/wget-1.17.tar.xz ;
+        tar -xJf wget-1.17.tar.xz ;
+        cd wget-1.17 ;
+        ./configure ;
+        sudo make install ;
+        cd .. ;
       fi
     - if [[ "$TEST_PYTHON" == 1 || "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
         pip install "urllib3[secure]" "requests[security]" ;
