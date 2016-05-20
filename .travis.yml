@@ -4,35 +4,42 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1 TEST_WGET_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.4
 
-    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: precise
       sudo: required
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
+    - env: DIST=precise SUDO=required TEST_WGET_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_WGET=1
+    - env: DIST=trusty SUDO=required TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
