@@ -33,11 +33,4 @@ script:
     - ls -l /usr/bin/sudo
     - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
     - echo $NO_SUDO
-    - if [[ "$NO_SUDO" != 1 ]]; then
-        sudo apt-get -qq update ;
-        sudo apt-get upgrade ;
-      fi
-    - pip install requests
-    - python -c "import requests; print(requests.get('http://www.proofwiki.org/wiki/$1').status_code);"
-    - wget --help
-    - wget "http://www.proofwiki.org/wiki/$1"
+    - python -c "import platform; print(platform.linux_distribution());"
