@@ -32,7 +32,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1 TEST_CURL=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_WGET=1
       os: linux
       dist: trusty
       sudo: required
@@ -72,6 +72,24 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=trusty SUDO=required APT=everything TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-everything TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+      language: python
+      python: 3.4
+
     - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1
       os: linux
       dist: precise
@@ -104,6 +122,9 @@ before_script:
     - wget --version
 
 install:
+    - if [[ "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
+        sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
+      fi
     - if [[ "$TEST_PYTHON" == 1 ]]; then
         pip install "requests[security]" ;
       fi
