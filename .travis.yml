@@ -86,6 +86,13 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=trusty SUDO=required APT=everything-debian-sid-wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
     - env: DIST=trusty SUDO=required APT=debian-sid-everything
       os: linux
       dist: trusty
@@ -129,9 +136,15 @@ before_script:
     - wget --version
 
 install:
-    - if [[ "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
+    - if [[ "$APT" == "everything-debian-sid-wget" || "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
         sudo apt-get -qq update ;
         sudo apt-get -yf -o Dpkg::Options::="--force-confold" upgrade ;
+      fi
+    - if [[ "$APT" == "everything-debian-sid-wget" ]]; then
+        curl -sSL "https://ftp-master.debian.org/keys/archive-key-7.0.asc" | sudo -E apt-key add -
+        echo "deb http://ftp.us.debian.org/debian unstable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+        sudo apt-get -qq update ;
+        sudo apt-get -yf install wget ;
       fi
     - if [[ "$TEST_PYTHON" == 1 || "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
         pip install "urllib3[secure]" "requests[security]" ;
