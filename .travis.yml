@@ -11,13 +11,6 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
-      os: linux
-      dist: trusty
-      sudo: required
-      language: python
-      python: 3.4
-
     - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
@@ -25,7 +18,21 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_CURL=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_PYTHON=1 TEST_CURL=1
       os: linux
       dist: trusty
       sudo: required
@@ -38,7 +45,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1 TEST_CURL=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1
       os: linux
       dist: trusty
       sudo: required
@@ -47,6 +54,20 @@ matrix:
           sources:
             - debian-sid
           packages:
+            - wget
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl+wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
             - wget
       language: python
       python: 3.4
@@ -82,9 +103,13 @@ before_script:
     - python --version
     - wget --version
 
-script:
+install:
     - if [[ "$TEST_PYTHON" == 1 ]]; then
         pip install "requests[security]" ;
+      fi
+
+script:
+    - if [[ "$TEST_PYTHON" == 1 ]]; then
         python -c "import requests; print(requests.get('$URL').status_code);" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
