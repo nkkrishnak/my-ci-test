@@ -1,6 +1,6 @@
 env:
   global:
-    URL=https://proofwiki.org/wiki/Main_Page
+    URL=https://www.proofwiki.org/wiki/Main_Page
 
 matrix:
   include:
@@ -199,7 +199,7 @@ script:
         python -c "import requests; print(requests.get('$URL').status_code);" ;
       fi
     - if [[ "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
-        python -c "import ssl, urllib3; conn = urllib3.connection_from_url('$URL', ssl_version=ssl.PROTOCOL_TLSv1_2); r = conn.request('GET', '$URL'); print(r.status);" ;
+        python -c "import ssl, urllib3; conn = urllib3.connection_from_url('$URL', ssl_version=ssl.PROTOCOL_TLSv1_2); r = conn.request('GET', '$URL', assert_same_host=False); print(r.status);" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
         wget $URL ;
