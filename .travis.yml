@@ -11,6 +11,13 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
     - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
@@ -25,6 +32,138 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required TEST_WGET=1 TEST_WGET_EXPLICIT=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - wget
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl+wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
+            - wget
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=everything TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=everything-debian-sid-wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required BUILD=wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=everything BUILD=wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-everything
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+      language: python
+      python: 3.4
+
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl BUILD=wget TEST_WGET=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
+      language: python
+      python: 3.4
+
+    - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - openssl
+      language: python
+      python: 3.4
+
+    - env: DIST=precise SUDO=false APT=debian-sid-wget
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - wget
+      language: python
+      python: 3.4
+
   allow_failures:
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
@@ -33,9 +172,9 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
+    - env: DIST=precise SUDO=required TEST_WGET_EXPLICIT=1 TEST_CURL_EXPLICIT=1
       os: linux
-      dist: trusty
+      dist: precise
       sudo: required
       language: python
       python: 3.4
