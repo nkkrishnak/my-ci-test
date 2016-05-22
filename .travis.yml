@@ -1,6 +1,8 @@
 env:
   global:
-    URL=https://www.proofwiki.org/wiki/Main_Page
+    # This URL redirects to https://proofwiki.org/wiki/Main_Page ,
+    # which changes protocol and hostname, and only supports TLSv1.2
+    URL=http://www.proofwiki.org/wiki/Main_Page
 
 matrix:
   include:
@@ -28,9 +30,7 @@ matrix:
       language: python
       python: 3.3
 
-    # A http URL that redirects to https causes urllib3.PoolManager to raise MaxRetryError
-    # https://github.com/shazow/urllib3/issues/869
-    - env: URL=http://www.proofwiki.org/wiki/Main_Page DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -269,13 +269,6 @@ matrix:
       language: python
       python: 3.3
 
-    - env: URL=http://www.proofwiki.org/wiki/Main_Page DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
-      os: linux
-      dist: precise
-      sudo: false
-      language: python
-      python: 3.4
-
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: precise
@@ -413,6 +406,47 @@ matrix:
             - debian-sid
           packages:
             - wget
+      language: python
+      python: 3.4
+
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutls26
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libgnutls26
+      language: python
+      python: 3.4
+
+    # Using debian sid's libgnutls fails during installation
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutlsxx27
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libgnutlsxx27
+      language: python
+      python: 3.4
+
+    # Using debian sid's libgnutls fails during installation
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutls-openssl27
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libgnutls-openssl27
       language: python
       python: 3.4
 
