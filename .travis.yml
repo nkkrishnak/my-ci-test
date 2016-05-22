@@ -206,7 +206,7 @@ matrix:
       python: 3.4
 
     # Using debian sid's libgnutls fails during installation
-    - env: DIST=precise SUDO=false APT=debian-sid-wget
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutls
       os: linux
       dist: precise
       sudo: false
