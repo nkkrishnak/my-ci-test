@@ -79,22 +79,8 @@ matrix:
       language: python
       python: 3.4
 
-    # Not OK; SSLError('bad handshake' ...)
+    # OK
     - env: DIST=precise SUDO=false TEST_REQUESTS_EXPLICIT=1
-      os: linux
-      dist: precise
-      sudo: false
-      language: python
-      python: 3.4
-
-    - env: DIST=precise SUDO=false TEST_REQUESTS_EXPLICIT=1 URL=https://www.proofwiki.org/wiki/Main_Page
-      os: linux
-      dist: precise
-      sudo: false
-      language: python
-      python: 3.4
-
-    - env: DIST=precise SUDO=false TEST_REQUESTS_EXPLICIT=1 URL=https://proofwiki.org/wiki/Main_Page
       os: linux
       dist: precise
       sudo: false
