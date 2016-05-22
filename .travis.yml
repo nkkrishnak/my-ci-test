@@ -206,7 +206,7 @@ matrix:
       python: 3.4
 
     # Using debian sid's libgnutls fails during installation
-    - env: DIST=precise SUDO=false APT=debian-sid-libgnutls TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutls26
       os: linux
       dist: precise
       sudo: false
@@ -215,7 +215,35 @@ matrix:
           sources:
             - debian-sid
           packages:
-            - libgnutls
+            - libgnutls26
+      language: python
+      python: 3.4
+
+    # Using debian sid's libgnutls fails during installation
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutlsxx27
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libgnutlsxx27
+      language: python
+      python: 3.4
+
+    # Using debian sid's libgnutls fails during installation
+    - env: DIST=precise SUDO=false APT=debian-sid-libgnutls-openssl27
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libgnutls-openssl27
       language: python
       python: 3.4
 
