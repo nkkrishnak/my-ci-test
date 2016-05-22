@@ -4,6 +4,7 @@ env:
 
 matrix:
   include:
+    # OK
     - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
@@ -11,6 +12,7 @@ matrix:
       language: python
       python: 3.4
 
+    # OK
     - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
@@ -18,6 +20,7 @@ matrix:
       language: python
       python: 2.7
 
+    # Python 3.3 and 2.x before 2.7.9 do not have ssl.PROTOCOL_TLSv1_2
     - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
@@ -33,6 +36,7 @@ matrix:
       language: python
       python: 3.4
 
+    # OK; SUDO=required uses a later image of precise
     - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
@@ -48,6 +52,7 @@ matrix:
       language: python
       python: 3.4
 
+    # OK; trusty mostly works, except wget as shown in the next job
     - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: trusty
@@ -55,7 +60,7 @@ matrix:
       language: python
       python: 3.4
 
-    # These fail on trusty also, as the command line options dont exist
+    # Trusty wget fails
     - env: DIST=trusty SUDO=required TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
@@ -106,7 +111,7 @@ matrix:
       python: 3.4
 
     # Installing debian sid's wget ...
-    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET_EXPLICIT=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
@@ -173,7 +178,7 @@ matrix:
             - debian-sid
           packages:
             - openssl
-            - openssl-dev
+            - libgnutls-dev
       language: python
       python: 3.4
 
@@ -206,6 +211,13 @@ matrix:
       python: 3.4
 
   allow_failures:
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.3
+
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: precise
@@ -240,7 +252,7 @@ matrix:
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
