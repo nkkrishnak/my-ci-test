@@ -30,13 +30,20 @@ install:
         sudo apt-get -yf install wget ;
       fi
     - if [[ "$BUILD" == "gnutls" ]]; then
+        export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH ;
         wget http://ftp.gnu.org/gnu/gnutls/gnutls-3.0.22.tar.xz ;
         tar -xJf gnutls-3.0.22.tar.xz ;
         cd gnutls-3.0.22 ;
         ./configure --prefix=$HOME/gnutls ;
         make install ;
         cd .. ;
-        export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH ;
+        ls $HOME/gnutls/lib ;
+        wget ftp://ftp.openssl.org/source/openssl-1.0.2h.tar.gz ;
+        tar -xzf openssl-1.0.2h.tar.gz ;
+        cd openssl-1.0.2h ;
+        ./configure --prefix=$HOME/gnutls ;
+        make install ;
+        ls $HOME/gnutls/lib ;
       fi
     - if [[ "$BUILD" == "wget" ]]; then
         wget http://ftp.gnu.org/gnu/wget/wget-1.17.tar.xz ;
