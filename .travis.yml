@@ -15,6 +15,8 @@ matrix:
       python: 3.4
       addons:
         apt:
+          sources:
+            - debian-sid
           packages:
             - nettle-dev
 
