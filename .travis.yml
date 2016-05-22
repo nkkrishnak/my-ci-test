@@ -28,6 +28,14 @@ matrix:
       language: python
       python: 3.3
 
+    # A http URL that redirects to https causes urllib3 to break
+    - env: URL=http://www.proofwiki.org/wiki/Main_Page DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
     # These all fail on precise containers
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
@@ -133,7 +141,7 @@ matrix:
       python: 3.4
 
     # Doing an upgrade and installing debian wget doesnt help
-    - env: DIST=trusty SUDO=required APT=everything-debian-sid-wget TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=everything-debian-sid-wget TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
