@@ -13,6 +13,10 @@ matrix:
       sudo: false
       language: python
       python: 3.4
+      addons:
+        apt:
+          packages:
+            - nettle-dev
 
 install:
     - if [[ "$APT" == "everything-debian-sid-wget" || "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
@@ -26,20 +30,13 @@ install:
         sudo apt-get -yf install wget ;
       fi
     - if [[ "$BUILD" == "gnutls" ]]; then
+        wget http://ftp.gnu.org/gnu/gnutls/gnutls-3.0.22.tar.xz ;
+        tar -xJf gnutls-3.0.22.tar.xz ;
+        cd gnutls-3.0.22 ;
+        ./configure --prefix=$HOME/gnutls ;
+        make install ;
+        cd .. ;
         export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH ;
-        export PATH=$HOME/gnutls/bin:$PATH ;
-        wget ftp://ftp.gnu.org/gnu/nettle/nettle-3.2.tar.gz ;
-        tar -xzf nettle-3.2.tar.gz ;
-        cd nettle-3.2 ;
-        ./configure --prefix=$HOME/gnutls ;
-        make install ;
-        cd .. ;
-        wget http://ftp.gnu.org/gnu/gnutls/gnutls-3.1.5.tar.xz ;
-        tar -xJf gnutls-3.1.5.tar.xz ;
-        cd gnutls-3.1.5 ;
-        ./configure --prefix=$HOME/gnutls ;
-        make install ;
-        cd .. ;
       fi
     - if [[ "$BUILD" == "wget" ]]; then
         wget http://ftp.gnu.org/gnu/wget/wget-1.17.tar.xz ;
