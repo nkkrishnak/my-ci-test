@@ -15,11 +15,8 @@ matrix:
       python: 3.4
       addons:
         apt:
-          sources:
-            - debian-sid
           packages:
             - nettle-dev
-            - openssl
 
 install:
     - if [[ "$APT" == "everything-debian-sid-wget" || "$APT" == "everything" || "$APT" == "debian-sid-everything" ]]; then
