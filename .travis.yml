@@ -28,11 +28,8 @@ matrix:
       language: python
       python: 3.3
 
-    # A http URL that redirects to https causes urllib3 to break with
-    # urllib3.exceptions.MaxRetryError
-    # HTTPConnectionPool(host='www.proofwiki.org', port=80)
-    # Max retries exceeded with url
-    # https://proofwiki.org/wiki/Main_Page (Caused by ResponseError('too many redirects',))
+    # A http URL that redirects to https causes urllib3.PoolManager to raise MaxRetryError
+    # https://github.com/shazow/urllib3/issues/869
     - env: URL=http://www.proofwiki.org/wiki/Main_Page DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
@@ -81,7 +78,7 @@ matrix:
       python: 3.4
 
     # Installing debian sid's libssl1.0.2 (via openssl) doesnt help
-    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
@@ -205,6 +202,20 @@ matrix:
             - debian-sid
           packages:
             - openssl
+      language: python
+      python: 3.4
+
+    # Using debian sid's libgnutls fails during installation
+    - env: DIST=precise SUDO=false APT=debian-sid-wget
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libgnutls
       language: python
       python: 3.4
 
@@ -347,6 +358,7 @@ matrix:
             - debian-sid
           packages:
             - openssl
+            - libgnutls-dev
       language: python
       python: 3.4
 
