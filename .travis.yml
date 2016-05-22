@@ -6,7 +6,13 @@ env:
 
 matrix:
   include:
-    # OK
+    - env: DIST=precise SUDO=false NOOP=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
     - env: DIST=precise SUDO=false BUILD=gnutls TEST_PYTHON=1
       os: linux
       dist: precise
@@ -67,6 +73,8 @@ before_script:
     - wget --version
     - curl --version
     - ldd `which python`
+    - find /opt/python/3.4.2 -name '*ssl*.so'
+    - ldd `/opt/python/3.4.2/lib/libpython3.4m.so.1.0`
     - ldd `which wget`
     - ldd `which curl`
 
