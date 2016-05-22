@@ -336,13 +336,6 @@ matrix:
       python: 3.4
 
   allow_failures:
-    - env: DIST=precise SUDO=false TEST_REQUESTS_EXPLICIT=1
-      os: linux
-      dist: precise
-      sudo: false
-      language: python
-      python: 3.4
-
     - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
