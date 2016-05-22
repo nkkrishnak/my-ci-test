@@ -27,7 +27,7 @@ install:
       fi
     - if [[ "$BUILD" == "gnutls" ]]; then
         export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH ;
-        export PATH=$HOME/gnutls/bin:$PATH
+        export PATH=$HOME/gnutls/bin:$PATH ;
         wget ftp://ftp.gnu.org/gnu/nettle/nettle-3.2.tar.gz ;
         tar -xzf nettle-3.2.tar.gz ;
         cd nettle-3.2 ;
