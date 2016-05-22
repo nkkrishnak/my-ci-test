@@ -149,14 +149,14 @@ matrix:
       python: 3.4
 
     # Building from source fails
-    - env: DIST=trusty SUDO=required BUILD=wget TEST_WGET=1
+    - env: DIST=trusty SUDO=required BUILD=wget TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
       language: python
       python: 3.4
 
-    - env: DIST=trusty SUDO=required APT=everything BUILD=wget TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=everything BUILD=wget TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
@@ -176,7 +176,7 @@ matrix:
       python: 3.4
 
     # Building from source using debian sid's openssl fails
-    - env: DIST=trusty SUDO=required APT=debian-sid-openssl BUILD=wget TEST_WGET=1
+    - env: DIST=trusty SUDO=required APT=debian-sid-openssl BUILD=wget TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
@@ -400,7 +400,7 @@ script:
         python -c "import requests; print(requests.get('$URL').status_code);" ;
       fi
     - if [[ "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
-        python -c "import ssl, urllib3; conn = urllib3.connection_from_url('$URL', ssl_version=ssl.PROTOCOL_TLSv1_2); r = conn.request('GET', '$URL', assert_same_host=False); print(r.status);" ;
+        python -c "import ssl, urllib3; r = urllib3.PoolManager(ssl_version=ssl.PROTOCOL_TLSv1_2).connection_from_url('$URL').request('GET', '$URL', assert_same_host=False); print(r.status);" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
         wget $URL ;
