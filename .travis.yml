@@ -6,7 +6,7 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false APT=debian-sid-libssl+openssl TEST_PYTHON=1
+    - env: DIST=precise SUDO=false APT=debian-sid-libssl TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
       sudo: false
