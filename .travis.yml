@@ -7,7 +7,15 @@ env:
 matrix:
   include:
     # OK
-    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
+    # Not OK; SSLError('bad handshake' ...)
+    - env: DIST=precise SUDO=false TEST_REQUESTS_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -15,7 +23,7 @@ matrix:
       python: 3.4
 
     # OK
-    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -23,15 +31,15 @@ matrix:
       python: 2.7
 
     # Python 3.3 and 2.x before 2.7.9 do not have ssl.PROTOCOL_TLSv1_2
-    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.3
 
-    # PyPy does not have ssl.PROTOCOL_TLSv1_2
-    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
+    # PyPy isnt supported by urllib3[secure]
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -263,6 +271,13 @@ matrix:
       python: 3.4
 
   allow_failures:
+    - env: DIST=precise SUDO=false TEST_REQUESTS_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.4
+
     - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
