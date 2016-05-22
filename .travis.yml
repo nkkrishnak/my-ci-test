@@ -6,7 +6,7 @@ env:
 
 matrix:
   include:
-    - env: DIST=precise SUDO=false APT=debian-sid-libssl TEST_PYTHON=1
+    - env: DIST=precise SUDO=false APT=debian-sid-libssl+openssl TEST_PYTHON=1
       os: linux
       dist: precise
       sudo: false
@@ -16,6 +16,7 @@ matrix:
             - debian-sid
           packages:
             - libssl
+            - openssl
       language: python
       python: 3.4
 
