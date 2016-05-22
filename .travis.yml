@@ -19,6 +19,45 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=precise SUDO=false APT=debian-sid-libssl TEST_PYTHON=1
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libssl1.0.0
+      language: python
+      python: 2.7
+
+    - env: DIST=precise SUDO=false APT=debian-sid-libssl TEST_PYTHON=1
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libssl1.0.0
+      language: python
+      python: 3.3
+
+    - env: DIST=precise SUDO=false APT=debian-sid-libssl TEST_PYTHON=1
+      os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - libssl1.0.0
+      language: python
+      python: 2.6
+
     # OK
     - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
