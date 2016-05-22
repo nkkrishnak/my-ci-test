@@ -451,7 +451,7 @@ script:
         python -c "import requests; print(requests.get('$URL').status_code);" ;
       fi
     - if [[ "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
-        python -c "import ssl, urllib3; r = urllib3.PoolManager(ssl_version=ssl.PROTOCOL_TLSv1_2, retries=10).connection_from_url('$URL').request('GET', '$URL', assert_same_host=False); print(r.status);" ;
+        python -c "import ssl, urllib3; r = urllib3.PoolManager().request('GET', '$URL'); print(r.status);" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
         wget $URL ;
