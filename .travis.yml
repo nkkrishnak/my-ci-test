@@ -30,6 +30,14 @@ matrix:
       language: python
       python: 3.3
 
+    # PyPy does not have ssl.PROTOCOL_TLSv1_2
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: pypy
+
     - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
       os: linux
       dist: precise
@@ -268,6 +276,13 @@ matrix:
       sudo: false
       language: python
       python: 3.3
+
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: pypy
 
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
