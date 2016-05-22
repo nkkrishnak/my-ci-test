@@ -16,7 +16,6 @@ matrix:
             - debian-sid
           packages:
             - libssl1.0.0
-            - openssl
       language: python
       python: 3.4
 
