@@ -31,6 +31,7 @@ install:
       fi
     - if [[ "$BUILD" == "gnutls" ]]; then
         export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH ;
+        export PKG_CONFIG_PATH=$HOME/gnutls/lib/pkgconfig/:$PKG_CONFIG_PATH ;
         wget http://ftp.gnu.org/gnu/gnutls/gnutls-3.0.22.tar.xz ;
         tar -xJf gnutls-3.0.22.tar.xz ;
         cd gnutls-3.0.22 ;
@@ -41,8 +42,11 @@ install:
         wget ftp://ftp.openssl.org/source/openssl-1.0.2h.tar.gz ;
         tar -xzf openssl-1.0.2h.tar.gz ;
         cd openssl-1.0.2h ;
-        ./configure --prefix=$HOME/gnutls ;
+        ./config --prefix=$HOME/gnutls ;
+        make depend ;
+        make ;
         make install ;
+        cd .. ;
         ls $HOME/gnutls/lib ;
       fi
     - if [[ "$BUILD" == "wget" ]]; then
@@ -62,7 +66,9 @@ before_script:
     - python --version
     - wget --version
     - curl --version
-    - curl --help
+    - ldd `which python`
+    - ldd `which wget`
+    - ldd `which curl`
 
 script:
     - if [[ "$TEST_PYTHON" == 1 ]]; then
