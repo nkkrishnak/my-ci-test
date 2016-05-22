@@ -7,7 +7,7 @@ env:
 matrix:
   include:
     # OK
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -15,7 +15,7 @@ matrix:
       python: 3.4
 
     # OK
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -23,7 +23,7 @@ matrix:
       python: 2.7
 
     # Python 3.3 and 2.x before 2.7.9 do not have ssl.PROTOCOL_TLSv1_2
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -31,19 +31,12 @@ matrix:
       python: 3.3
 
     # PyPy does not have ssl.PROTOCOL_TLSv1_2
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: pypy
-
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
-      os: linux
-      dist: precise
-      sudo: false
-      language: python
-      python: 3.4
 
     # These all fail on precise containers
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
@@ -54,7 +47,7 @@ matrix:
       python: 3.4
 
     # OK; SUDO=required uses a later image of precise
-    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
+    - env: DIST=precise SUDO=required TEST_PYTHON=1 TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
       sudo: required
@@ -70,7 +63,7 @@ matrix:
       python: 3.4
 
     # OK; trusty mostly works, except wget as shown in the next job
-    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_PYTHON_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
+    - env: DIST=trusty SUDO=required TEST_PYTHON=1 TEST_URLLIB3_EXPLICIT=1 TEST_REQUESTS_EXPLICIT=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: trusty
       sudo: required
@@ -270,14 +263,14 @@ matrix:
       python: 3.4
 
   allow_failures:
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
       language: python
       python: 3.3
 
-    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+    - env: DIST=precise SUDO=false TEST_URLLIB3_EXPLICIT=1
       os: linux
       dist: precise
       sudo: false
@@ -484,7 +477,7 @@ install:
         sudo make install ;
         cd .. ;
       fi
-    - if [[ "$TEST_PYTHON" == 1 || "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
+    - if [[ "$TEST_PYTHON" == 1 || "$TEST_URLLIB3_EXPLICIT" == 1 || "$TEST_REQUESTS_EXPLICIT" == 1 ]]; then
         pip install "urllib3[secure]" "requests[security]" ;
       fi
 
@@ -499,8 +492,11 @@ script:
     - if [[ "$TEST_PYTHON" == 1 ]]; then
         python -c "import requests; print(requests.get('$URL').status_code);" ;
       fi
-    - if [[ "$TEST_PYTHON_EXPLICIT" == 1 ]]; then
+    - if [[ "$TEST_URLLIB3_EXPLICIT" == 1 ]]; then
         python -c "import ssl, urllib3; r = urllib3.PoolManager(ssl_version=ssl.PROTOCOL_TLSv1_2).request('GET', '$URL'); print(r.status);" ;
+      fi
+    - if [[ "$TEST_REQUESTS_EXPLICIT" == 1 ]]; then
+        python requests_explicit.py "$URL" ;
       fi
     - if [[ "$TEST_WGET" == 1 ]]; then
         wget $URL ;
