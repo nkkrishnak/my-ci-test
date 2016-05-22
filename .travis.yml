@@ -36,7 +36,7 @@ install:
         ./configure --prefix=$HOME/gnutls ;
         make install ;
         cd .. ;
-        export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=$HOME/gnutls/lib:$LD_LIBRARY_PATH ;
       fi
     - if [[ "$BUILD" == "wget" ]]; then
         wget http://ftp.gnu.org/gnu/wget/wget-1.17.tar.xz ;
