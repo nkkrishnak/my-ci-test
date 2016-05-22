@@ -11,6 +11,21 @@ matrix:
       language: python
       python: 3.4
 
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 2.7
+
+    - env: DIST=precise SUDO=false TEST_PYTHON_EXPLICIT=1
+      os: linux
+      dist: precise
+      sudo: false
+      language: python
+      python: 3.3
+
+    # These all fail on precise containers
     - env: DIST=precise SUDO=false TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1 TEST_CURL_EXPLICIT=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: precise
@@ -25,6 +40,7 @@ matrix:
       language: python
       python: 3.4
 
+    # These fail on precise with sudo, as the command line options dont exist
     - env: DIST=precise SUDO=required TEST_WGET_EXPLICIT=1 TEST_CURL_EXPLICIT=1
       os: linux
       dist: precise
@@ -39,6 +55,7 @@ matrix:
       language: python
       python: 3.4
 
+    # These fail on trusty also, as the command line options dont exist
     - env: DIST=trusty SUDO=required TEST_WGET=1 TEST_WGET_EXPLICIT=1
       os: linux
       dist: trusty
@@ -46,6 +63,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Installing debian sid's libssl1.0.2 (via openssl) doesnt help
     - env: DIST=trusty SUDO=required APT=debian-sid-openssl TEST_WGET=1
       os: linux
       dist: trusty
@@ -59,6 +77,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Installing debian sid's wget doesnt help
     - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET=1
       os: linux
       dist: trusty
@@ -86,6 +105,21 @@ matrix:
       language: python
       python: 3.4
 
+    # Installing debian sid's wget ...
+    - env: DIST=trusty SUDO=required APT=debian-sid-wget TEST_WGET_EXPLICIT=1
+      os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          sources:
+            - debian-sid
+          packages:
+            - wget
+      language: python
+      python: 3.4
+
+    # Doing an upgrade doesnt help
     - env: DIST=trusty SUDO=required APT=everything TEST_WGET=1
       os: linux
       dist: trusty
@@ -93,6 +127,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Doing an upgrade and installing debian wget doesnt help
     - env: DIST=trusty SUDO=required APT=everything-debian-sid-wget TEST_WGET=1
       os: linux
       dist: trusty
@@ -100,6 +135,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Building from source fails
     - env: DIST=trusty SUDO=required BUILD=wget TEST_WGET=1
       os: linux
       dist: trusty
@@ -114,6 +150,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Doing an upgrade using debian sid fails during upgrade
     - env: DIST=trusty SUDO=required APT=debian-sid-everything
       os: linux
       dist: trusty
@@ -125,6 +162,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Building from source using debian sid's openssl fails
     - env: DIST=trusty SUDO=required APT=debian-sid-openssl BUILD=wget TEST_WGET=1
       os: linux
       dist: trusty
@@ -135,9 +173,11 @@ matrix:
             - debian-sid
           packages:
             - openssl
+            - openssl-dev
       language: python
       python: 3.4
 
+    # Using debian sid's openssl doesnt help
     - env: DIST=precise SUDO=false APT=debian-sid-openssl TEST_PYTHON=1 TEST_WGET=1 TEST_CURL=1
       os: linux
       dist: precise
@@ -151,6 +191,7 @@ matrix:
       language: python
       python: 3.4
 
+    # Using debian sid's wget fails during installation
     - env: DIST=precise SUDO=false APT=debian-sid-wget
       os: linux
       dist: precise
