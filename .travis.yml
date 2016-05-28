@@ -17,6 +17,6 @@ env:
 script:
   - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
   - $PYENV_ROOT/bin/pyenv install --skip-existing "$PYENV_VERSION"
-  - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
+  - python3.5 -m virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
   - source "$HOME/virtualenvs/$PYENV_VERSION/bin/activate"
   - python --version
