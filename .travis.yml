@@ -3,5 +3,22 @@ language: python
 python:
 - 3.5
 
+env:
+  global:
+    - PYENV_ROOT="$HOME/.pyenv"
+  matrix:
+    - PYENV_VERSION=pypy-5.0.1
+    - PYENV_VERSION=2.6.6  # no 2.6.5
+    - PYENV_VERSION=2.7.2
+
 script:
-  - ls $HOME/.pyenv
+  - if [[ -f "$PYENV_ROOT/bin/pyenv" ]]; then pushd "$PYENV_ROOT" && git pull && popd ; fi
+  - if [[ ! -f "$PYENV_ROOT/bin/pyenv" ]]; rm -rf "$PYENV_ROOT" && git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT" ; fi
+  - "$PYENV_ROOT/bin/pyenv" install --skip-existing "$PYENV_VERSION"
+  - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
+  - source "$HOME/virtualenvs/$PYENV_VERSION/bin/activate"
+  - python --version
+
+cache:
+  directories:
+    - $PYENV_ROOT
