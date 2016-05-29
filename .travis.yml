@@ -8,11 +8,16 @@ env:
     - PYENV_ROOT=$HOME/.pyenv
 
   matrix:
+    - PYENV_VERSION=pypy-2.4.0
+    - PYENV_VERSION=pypy-2.5.0
+    - PYENV_VERSION=pypy-2.5.1
+    - PYENV_VERSION=pypy-2.6.0
+    - PYENV_VERSION=pypy-2.6.1
+    - PYENV_VERSION=pypy-4.0.1
+    - PYENV_VERSION=pypy-5.0.0
     - PYENV_VERSION=pypy-5.0.1
-    - PYENV_VERSION=2.6.6  # no 2.6.5
-    - PYENV_VERSION=2.7.2
-    - PYENV_VERSION=3.4.0
-    - PYENV_VERSION=jython-2.7.1b3
+    - PYENV_VERSION=pypy-5.1
+    - PYENV_VERSION=pypy-5.1.1
 
 script:
   - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
