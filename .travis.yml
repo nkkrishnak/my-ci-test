@@ -18,6 +18,7 @@ env:
     - PYENV_VERSION=pypy-5.0.1
     - PYENV_VERSION=pypy-5.1
     - PYENV_VERSION=pypy-5.1.1
+    - PYENV_VERSION=pypy-dev
 
 before_install:
   - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
