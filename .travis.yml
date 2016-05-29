@@ -25,9 +25,7 @@ before_install:
   - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
   - source "$HOME/virtualenvs/$PYENV_VERSION/bin/activate"
   - python --version
-  - pip install tox
 
 script:
   - python pwb.py version
   - PYTHONIOENCODING=UTF8 python pwb.py version
-  - tox -e enc
