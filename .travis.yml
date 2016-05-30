@@ -29,5 +29,6 @@ before_install:
 script:
   - python -c "import sys; print(sys.stdout.encoding)"
   - python pwb.py version
+  - PYTHONIOENCODING=utf-8 python pwb.py version
   - PYTHONIOENCODING=UTF-8 python pwb.py version
   - PYTHONIOENCODING=UTF8 python pwb.py version
