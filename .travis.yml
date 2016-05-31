@@ -1,6 +1,6 @@
 language: python
 # should be language: generic , however that cant be overridden by miniconda rules
-
+sudo: false
 
 addons:
   apt:
@@ -31,6 +31,7 @@ matrix:
       dist: trusty
       language: generic
 
+    # miniconda
 
     - env: PYENV_VERSION=miniconda3-4.0.5 DIST=precise LD_LIBRARY_PATH=/opt/python/3.5.0/lib/
       python: 3.5
@@ -39,44 +40,15 @@ matrix:
       python: 3.5
       dist: trusty
 
+    # Stackless
+
     - env: PYENV_VERSION=stackless-3.4.1 DIST=precise
       dist: precise
     - env: PYENV_VERSION=stackless-dev DIST=precise
       dist: precise
       language: generic
 
-    - env: PYENV_VERSION=ironpython-2.7.5 DIST=precise
-      dist: precise
-      python: 3.5
-      addons:
-        apt:
-          packages:
-            - python-virtualenv
-            - mono-xbuild
-            - mono-dmcs
-    - env: PYENV_VERSION=ironpython-dev DIST=precise
-      dist: precise
-      python: 3.5
-      addons:
-        apt:
-          packages:
-            - python-virtualenv
-            - mono-xbuild
-            - mono-dmcs
-            # missing Numerics, Complex & BigInt
-            - mono-complete
-
-    - env: PYENV_VERSION=ironpython-dev DIST=trusty
-      dist: trusty
-      python: 3.5
-      addons:
-        apt:
-          packages:
-            - python-virtualenv
-            - mono-xbuild
-            - mono-dmcs
-            # missing Numerics, Complex & BigInt
-            - mono-complete
+    # PyPy
 
     - env: PYENV_VERSION=pypy-2.4.0 DIST=precise
       dist: precise
@@ -90,7 +62,6 @@ matrix:
       dist: precise
     - env: PYENV_VERSION=pypy-5.1.1 DIST=precise
       dist: precise
-
     - env: PYENV_VERSION=pypy-2.4.0 DIST=trusty
       dist: trusty
       sudo: required
@@ -140,6 +111,43 @@ matrix:
 
     - env: PYENV_VERSION=stackless-dev DIST=precise
       dist: precise
+      language: python
+
+    # IronPython
+
+    - env: PYENV_VERSION=ironpython-2.7.5 DIST=precise
+      dist: precise
+      sudo: required
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            - mono-complete
+    - env: PYENV_VERSION=ironpython-dev DIST=precise
+      dist: precise
+      sudo: required
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            - mono-complete
+    - env: PYENV_VERSION=ironpython-dev DIST=trusty
+      dist: trusty
+      sudo: required
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            - mono-complete
 
   allow_failures:
     - env: PYENV_VERSION=jython-2.7.0 DIST=precise
@@ -164,6 +172,48 @@ matrix:
 
     - env: PYENV_VERSION=stackless-dev DIST=precise
       dist: precise
+      language: python
+
+    - env: PYENV_VERSION=ironpython-2.7.5 DIST=precise
+      dist: precise
+      sudo: required
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            - mono-complete
+    - env: PYENV_VERSION=ironpython-dev DIST=precise
+      dist: precise
+      sudo: required
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            - mono-complete
+    - env: PYENV_VERSION=ironpython-dev DIST=trusty
+      dist: trusty
+      sudo: required
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            - mono-complete
+
+before_install:
+  - |
+    if [[ "${PYENV_VERSION%-*}" == 'ironpython' ]]; then
+      echo "binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc none" | sudo tee -a /etc/fstab
+      echo ':CLR:M::MZ::/usr/bin/mono:' | sudo tee /proc/sys/fs/binfmt_misc/register
+    fi
 
 before_script:
   - ls $HOME/virtualenv/ || true
@@ -175,11 +225,8 @@ before_script:
 
 script:
   - (/opt/pyenv/bin/pyenv install --list | grep "^${PYENV_VERSION}$") && export PYENV=/opt/pyenv/bin/pyenv || export PYENV=$PYENV_ROOT/bin/pyenv
-  - echo "$PYENV"
   - test -x "$PYENV" || (rm -rf "$PYENV_ROOT" && git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT")
   - $PYENV install --skip-existing "$PYENV_VERSION"
-  - file "$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" || true
-  - head "$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" || true
   - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$VIRTUAL_ENV_BASE/$PYENV_VERSION"
   - source "$VIRTUAL_ENV_BASE/$PYENV_VERSION/bin/activate"
   - python --version
