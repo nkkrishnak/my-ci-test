@@ -1,25 +1,54 @@
-language: python
+language: generic
 
-python:
-- 2.7
+addons:
+  apt:
+    packages:
+      - python-virtualenv
 
 env:
   global:
     - PYENV_ROOT=$HOME/.pyenv
 
-  matrix:
-    - PYENV_VERSION=pypy-2.4.0
-    - PYENV_VERSION=pypy-2.5.0
-    - PYENV_VERSION=pypy-2.5.1
-    - PYENV_VERSION=pypy-2.6.0
-    - PYENV_VERSION=pypy-2.6.1
-    - PYENV_VERSION=pypy-4.0.1
-    - PYENV_VERSION=pypy-5.0.0
-    - PYENV_VERSION=pypy-5.0.1
-    - PYENV_VERSION=pypy-5.1
-    - PYENV_VERSION=pypy-5.1.1
+matrix:
+  include:
+    - env: PYENV_VERSION=pypy-2.4.0 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=pypy-2.6.1 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=pypy-4.0.1 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=pypy-5.0.1 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=pypy-5.1 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=pypy-5.1.1 DIST=precise
+      dist: precise
+
+    - env: PYENV_VERSION=pypy-2.4.0 DIST=trusty
+      dist: trusty
+      sudo: required
+    - env: PYENV_VERSION=pypy-2.6.1 DIST=trusty
+      dist: trusty
+      sudo: required
+    - env: PYENV_VERSION=pypy-4.0.1 DIST=trusty
+      dist: trusty
+      sudo: required
+    - env: PYENV_VERSION=pypy-5.0.1 DIST=trusty
+      dist: trusty
+      sudo: required
+    - env: PYENV_VERSION=pypy-5.1 DIST=trusty
+      dist: trusty
+      sudo: required
+    - env: PYENV_VERSION=pypy-5.1.1 DIST=trusty
+      dist: trusty
+      sudo: required
 
 script:
+  # Travis trusty has a basically empty directory at $PYENV_ROOT
+  - (test -d "$PYENV_ROOT" && find "$PYENV_ROOT") || true
+
+  - test '!' -d "$PYENV_ROOT" || rm -rf "$PYENV_ROOT"
+
   - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
   - $PYENV_ROOT/bin/pyenv install --skip-existing "$PYENV_VERSION"
   - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
