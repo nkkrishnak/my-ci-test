@@ -1,7 +1,9 @@
 language: python
 
-python:
-- 2.7
+python: 2.7
+
+dist: trusty
+sudo: required
 
 env:
   global:
@@ -20,6 +22,8 @@ env:
     - PYENV_VERSION=pypy-5.1.1
 
 before_install:
+  # Travis trusty has a basically empty directory at $PYENV_ROOT
+  - test '!' -d "$PYENV_ROOT" || rm -rf "$PYENV_ROOT"
   - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
   - $PYENV_ROOT/bin/pyenv install --skip-existing "$PYENV_VERSION"
   - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
