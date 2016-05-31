@@ -1,4 +1,6 @@
-language: generic
+language: python
+# should be language: generic , however that cant be overridden by miniconda rules
+
 
 addons:
   apt:
@@ -8,26 +10,73 @@ addons:
 env:
   global:
     - PYENV_ROOT=$HOME/.pyenv
+    # VIRTUAL_ENV_BASE is ${VIRTUAL_ENV%/*}, however $VIRTUAL_ENV is not
+    # set for language: generic
+    - VIRTUAL_ENV_BASE=~/virtualenv
 
 matrix:
   include:
+    # Jython
     - env: PYENV_VERSION=jython-2.7.0 DIST=precise
       dist: precise
+      language: generic
     - env: PYENV_VERSION=jython-dev DIST=precise
       dist: precise
-    - env: PYENV_VERSION=miniconda2-4.0.5 DIST=precise
-      dist: precise
-    - env: PYENV_VERSION=miniconda3-4.0.5 DIST=precise
+      language: generic
+
+    - env: PYENV_VERSION=jython-2.7.0 DIST=trusty
+      dist: trusty
+      language: generic
+    - env: PYENV_VERSION=jython-dev DIST=trusty
+      dist: trusty
+      language: generic
+
+
+    - env: PYENV_VERSION=miniconda3-4.0.5 DIST=precise LD_LIBRARY_PATH=/opt/python/3.5.0/lib/
       python: 3.5
       dist: precise
+    - env: PYENV_VERSION=miniconda3-4.0.5 DIST=trusty LD_LIBRARY_PATH=/opt/python/3.5.0/lib/
+      python: 3.5
+      dist: trusty
+
     - env: PYENV_VERSION=stackless-3.4.1 DIST=precise
       dist: precise
     - env: PYENV_VERSION=stackless-dev DIST=precise
       dist: precise
+      language: generic
+
     - env: PYENV_VERSION=ironpython-2.7.5 DIST=precise
       dist: precise
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
     - env: PYENV_VERSION=ironpython-dev DIST=precise
       dist: precise
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            # missing Numerics, Complex & BigInt
+            - mono-complete
+
+    - env: PYENV_VERSION=ironpython-dev DIST=trusty
+      dist: trusty
+      python: 3.5
+      addons:
+        apt:
+          packages:
+            - python-virtualenv
+            - mono-xbuild
+            - mono-dmcs
+            # missing Numerics, Complex & BigInt
+            - mono-complete
 
     - env: PYENV_VERSION=pypy-2.4.0 DIST=precise
       dist: precise
@@ -61,16 +110,76 @@ matrix:
       dist: trusty
       sudo: required
 
+# Failures (must all be replicated into the allow_failures section)
+
+    # Jython
+
+    - env: PYENV_VERSION=jython-2.7.0 DIST=precise
+      dist: precise
+      language: python
+    - env: PYENV_VERSION=jython-dev DIST=precise
+      dist: precise
+      language: python
+    - env: PYENV_VERSION=jython-2.7.0 DIST=trusty
+      dist: trusty
+      language: python
+    - env: PYENV_VERSION=jython-dev DIST=trusty
+      dist: trusty
+      language: python
+
+    # Miniconda 2
+
+    - env: PYENV_VERSION=miniconda2-4.0.5 DIST=precise
+      python: 2.7.9
+      dist: precise
+    - env: PYENV_VERSION=miniconda2-4.0.5 DIST=trusty
+      python: 2.7.9
+      dist: trusty
+
+    # Stackless
+
+    - env: PYENV_VERSION=stackless-dev DIST=precise
+      dist: precise
+
+  allow_failures:
+    - env: PYENV_VERSION=jython-2.7.0 DIST=precise
+      dist: precise
+      language: python
+    - env: PYENV_VERSION=jython-dev DIST=precise
+      dist: precise
+      language: python
+    - env: PYENV_VERSION=jython-2.7.0 DIST=trusty
+      dist: trusty
+      language: python
+    - env: PYENV_VERSION=jython-dev DIST=trusty
+      dist: trusty
+      language: python
+
+    - env: PYENV_VERSION=miniconda2-4.0.5 DIST=precise
+      python: 2.7.9
+      dist: precise
+    - env: PYENV_VERSION=miniconda2-4.0.5 DIST=trusty
+      python: 2.7.9
+      dist: trusty
+
+    - env: PYENV_VERSION=stackless-dev DIST=precise
+      dist: precise
+
 before_script:
-  # Travis trusty has a basically empty directory at $PYENV_ROOT
-  - (test -d "$PYENV_ROOT" && find "$PYENV_ROOT") || true
+  - ls $HOME/virtualenv/ || true
+  - if [[ "$LD_LIBRARY_PATH" != '' ]]; then echo $LD_LIBRARY_PATH; ls $LD_LIBRARY_PATH; fi
+  - ls $VIRTUAL_ENV_BASE || true
   - which pyenv || true
+  - /opt/pyenv/bin/pyenv install --list || true
+  - find /opt/pyenv/ || true
 
 script:
-  - test '!' -d "$PYENV_ROOT" || rm -rf "$PYENV_ROOT"
-
-  - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
-  - $PYENV_ROOT/bin/pyenv install --skip-existing "$PYENV_VERSION"
-  - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$HOME/virtualenvs/$PYENV_VERSION"
-  - source "$HOME/virtualenvs/$PYENV_VERSION/bin/activate"
+  - (/opt/pyenv/bin/pyenv install --list | grep "^${PYENV_VERSION}$") && export PYENV=/opt/pyenv/bin/pyenv || export PYENV=$PYENV_ROOT/bin/pyenv
+  - echo "$PYENV"
+  - test -x "$PYENV" || (rm -rf "$PYENV_ROOT" && git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT")
+  - $PYENV install --skip-existing "$PYENV_VERSION"
+  - file "$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" || true
+  - head "$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" || true
+  - virtualenv --python="$PYENV_ROOT/versions/$PYENV_VERSION/bin/python" "$VIRTUAL_ENV_BASE/$PYENV_VERSION"
+  - source "$VIRTUAL_ENV_BASE/$PYENV_VERSION/bin/activate"
   - python --version
