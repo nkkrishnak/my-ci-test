@@ -11,6 +11,24 @@ env:
 
 matrix:
   include:
+    - env: PYENV_VERSION=jython-2.7.0 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=jython-dev DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=miniconda2-4.0.5 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=miniconda3-4.0.5 DIST=precise
+      python: 3.5
+      dist: precise
+    - env: PYENV_VERSION=stackless-3.4.1 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=stackless-dev DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=ironpython-2.7.5 DIST=precise
+      dist: precise
+    - env: PYENV_VERSION=ironpython-dev DIST=precise
+      dist: precise
+
     - env: PYENV_VERSION=pypy-2.4.0 DIST=precise
       dist: precise
     - env: PYENV_VERSION=pypy-2.6.1 DIST=precise
@@ -43,10 +61,12 @@ matrix:
       dist: trusty
       sudo: required
 
-script:
+before_script:
   # Travis trusty has a basically empty directory at $PYENV_ROOT
   - (test -d "$PYENV_ROOT" && find "$PYENV_ROOT") || true
+  - which pyenv || true
 
+script:
   - test '!' -d "$PYENV_ROOT" || rm -rf "$PYENV_ROOT"
 
   - git clone --depth 1 https://github.com/yyuu/pyenv.git "$PYENV_ROOT"
