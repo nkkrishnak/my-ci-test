@@ -6,6 +6,8 @@ matrix:
         apt:
           packages:
             - python-ipaddr
+            - python-requests
+            - python-pyopenssl
 
 before_install:
     - id
