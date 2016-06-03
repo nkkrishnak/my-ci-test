@@ -13,16 +13,6 @@ before_install:
     - id
     - env
     - python --version
-    - cat $HOME/.pydistutils.cfg || true
-    - export PYTHONPATH=~/.py-site-packages
-    - touch $HOME/.pydistutils.cfg
-    - echo '[build]' >> $HOME/.pydistutils.cfg
-    - echo 'build-base=$HOME/python/build' >> $HOME/.pydistutils.cfg
-    - echo >> $HOME/.pydistutils.cfg
-    - echo '[install]' >> $HOME/.pydistutils.cfg
-    - echo 'install_lib = ~/.py-site-packages' >> $HOME/.pydistutils.cfg
-    - echo 'install_scripts = ~/bin' >> $HOME/.pydistutils.cfg
-    - mkdir ~/.py-site-packages
 
 script:
     - python setup.py install
