@@ -7,7 +7,7 @@ matrix:
           packages:
             - python-ipaddr
             - python-requests
-            - python-pyopenssl
+            - python-openssl
 
 before_install:
     - id

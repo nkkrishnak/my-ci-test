@@ -9,7 +9,7 @@ setup(
     name='empty_module',
     version='0.1',
     description='empty_module.',
-    install_requires=['requests[security]'],
+    install_requires=['pyOpenSSL>=0.13', 'ndg-httpsclient'],
     long_description='empty_module',
     py_modules=[str('empty_module')],
 )
