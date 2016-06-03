@@ -24,7 +24,7 @@ before_install:
 
 script:
     - python setup.py test || true
-    - pip install --upgrade setuptools
+    - pip install --upgrade --user setuptools
     - python setup.py test || true
     - python setup.py install
     - python setup.py test
