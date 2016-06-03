@@ -51,6 +51,7 @@ matrix:
 before_install:
     - id
     - env
+    - ls -al ~/bin
     - python --version
     - virtualenv --version
     - if [[ "$VIRTUAL_ENV" == '' ]]; then
