@@ -16,8 +16,8 @@ before_install:
     - cat $HOME/.pydistutils.cfg || true
     - export PYTHONPATH=~/.py-site-packages
     - echo '[install]' > $HOME/.pydistutils.cfg
-    - echo 'install_lib = ~/.py-site-packages' > $HOME/.pydistutils.cfg
-    - echo 'install_scripts = ~/bin' > $HOME/.pydistutils.cfg
+    - echo 'install_lib = ~/.py-site-packages' >> $HOME/.pydistutils.cfg
+    - echo 'install_scripts = ~/bin' >> $HOME/.pydistutils.cfg
     - mkdir ~/.py-site-packages
 
 script:
