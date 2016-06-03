@@ -53,6 +53,7 @@ before_install:
     - env
     - ls -al ~/bin
     - python --version
+    - cat $HOME/.pydistutils.cfg || true
     - virtualenv --version
     - if [[ "$VIRTUAL_ENV" == '' ]]; then
         export PIP_USER_FLAG=--user ;
