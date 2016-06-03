@@ -26,5 +26,5 @@ script:
     - python setup.py test || true
     - pip install --upgrade --user setuptools
     - python setup.py test || true
-    - python setup.py install
+    - python setup.py install --user
     - python setup.py test
