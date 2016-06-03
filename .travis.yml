@@ -25,4 +25,5 @@ before_install:
     - mkdir ~/.py-site-packages
 
 script:
+    - python setup.py install
     - python setup.py test
