@@ -15,5 +15,8 @@ before_install:
     - python --version
 
 script:
+    - python setup.py test || true
+    - pip install --upgrade setuptools
+    - python setup.py test || true
     - python setup.py install
     - python setup.py test
