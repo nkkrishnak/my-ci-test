@@ -51,7 +51,7 @@ matrix:
 before_install:
     - id
     - env
-    - ls -al ~/bin
+    - ls -al ~/bin || true
     - python --version
     - cat $HOME/.pydistutils.cfg || true
     - virtualenv --version
