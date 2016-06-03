@@ -5,7 +5,15 @@ matrix:
       addons:
         apt:
           packages:
-            - python-ipaddr
+            - python-requests
+            - python-openssl
+
+    - language: generic
+      addons:
+        apt:
+          packages:
+            - python-pip
+            - python-setuptools
             - python-requests
             - python-openssl
 
