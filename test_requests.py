@@ -20,4 +20,4 @@ except Exception as e:
     print(e)
 
 requests.get('https://www.wikipedia.org/')
-requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html')
+requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
