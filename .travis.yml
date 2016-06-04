@@ -46,5 +46,6 @@ script:
     - sudo -E apt-get -yq update &>> ~/apt-get-update.log
     - apt-cache policy python-cryptography
     - apt-cache policy python-openssl
+    - pip install cryptography
     - python -c "import requests; requests.get('https://www.wikipedia.org/')"
     - python -c "import requests; requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html')"
