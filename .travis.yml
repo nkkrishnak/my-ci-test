@@ -17,6 +17,12 @@ matrix:
             - python-certifi
             - python-cryptography
             - python-ndg-httpsclient
+            - libssl1.0.2
+            - python-cffi-backend
+            - python-enum34
+            - python-idna
+            - python-ipaddress
+            - python-pyasn1
 
 before_install:
     - id
