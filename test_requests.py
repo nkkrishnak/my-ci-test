@@ -11,6 +11,7 @@ print('requests', requests.__version__)
 print('requests urllib3', requests.packages.urllib3.__version__)
 print('urllib3', urllib3.__version__)
 
+print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 
 print(requests.packages.urllib3, urllib3)
 
