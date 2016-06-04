@@ -8,6 +8,7 @@ matrix:
         apt:
           sources:
             - debian-sid
+            - kubuntu-backports
           packages:
             - python-ipaddr
             - python-requests
