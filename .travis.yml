@@ -9,6 +9,7 @@ matrix:
           sources:
             - debian-sid
           packages:
+            - python-ipaddr
             - python-requests
             - python-openssl
             - python-urllib3
@@ -29,3 +30,4 @@ before_install:
 
 script:
     - python -c "import requests; requests.get('https://www.wikipedia.org/')"
+    - python -c "import requests; requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html')"
