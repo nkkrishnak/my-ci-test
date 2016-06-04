@@ -21,6 +21,11 @@ matrix:
             - python-setuptools
             - python-requests
             - python-openssl
+            - python-urllib3
+            - python-six
+            - python-certifi
+            - python-cryptography
+            - python-ndg-httpsclient
 
 before_install:
     - id
