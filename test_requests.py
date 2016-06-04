@@ -1,6 +1,8 @@
 import requests
 import requests.packages.urllib3
 import requests.packages.urllib3.contrib.pyopenssl
+import requests.packages.urllib3.connection
+import requests.packages.urllib3.util
 
 import urllib3
 import urllib3.contrib.pyopenssl
@@ -9,11 +11,13 @@ print('requests', requests.__version__)
 print('requests urllib3', requests.packages.urllib3.__version__)
 print('urllib3', urllib3.__version__)
 
-import requests.packages.urllib3.connection
 
 print(requests.packages.urllib3, urllib3)
 
 print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+
+print(requests.packages.urllib3.util.HAS_SNI)
+print(requests.packages.urllib3.util.IS_PYOPENSSL)
 
 print('no inject:')
 
