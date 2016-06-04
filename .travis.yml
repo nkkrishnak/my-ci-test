@@ -21,10 +21,16 @@ before_install:
     - id
     - env
     - python --version
+    - if [[ "$VIRTUAL_ENV" == '' ]]; then
+        export INSTALL_USER_FLAG=--user ;
+      else
+        export INSTALL_USER_FLAG= ;
+      fi
 
 script:
     - python setup.py test || true
-    - pip install --upgrade --user setuptools
+    - pip install --upgrade $INSTALL_USER_FLAG setuptools
     - python setup.py test || true
-    - python setup.py install --user
+    - python setup.py install $INSTALL_USER_FLAG
     - python setup.py test
+    - python -c "import requests; requests.get('https://www.wikipedia.org/')"
