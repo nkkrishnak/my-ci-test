@@ -46,6 +46,6 @@ before_install:
     - apt-cache policy python-openssl
 
 script:
-    - pip install cryptography
-    - pip install PyOpenSSL
+    - pip install --upgrade cryptography
+    - pip install --upgrade PyOpenSSL
     - python test_requests.py
