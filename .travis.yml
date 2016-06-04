@@ -9,6 +9,10 @@ matrix:
           sources:
             - debian-sid
             - kubuntu-backports
+            - mopidy-stable
+            - google-chrome
+            - google-cloud
+            - git-core
           packages:
             - python-ipaddr
             - python-requests
@@ -34,6 +38,11 @@ before_install:
       fi
 
 script:
+    - apt-cache policy python-cryptography
+    - apt-cache policy python-openssl
+    - sudo echo "deb http://ftp.us.debian.org/debian stable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+    - sudo echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+    - sudo -E apt-get -yq update &>> ~/apt-get-update.log
     - apt-cache policy python-cryptography
     - apt-cache policy python-openssl
     - python -c "import requests; requests.get('https://www.wikipedia.org/')"
