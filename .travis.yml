@@ -15,6 +15,7 @@ matrix:
             - git-core
           packages:
             - python-ipaddr
+            - python-openssl=0.13-2ubuntu6
             - python-requests
             - python-urllib3
             - python-six
