@@ -2,12 +2,17 @@ matrix:
   include:
     - language: python
       python: '2.7_with_system_site_packages'
+      dist: trusty
+      sudo: required
       addons:
         apt:
+          sources:
+            - debian-sid
           packages:
             - python-requests
             - python-openssl
 
+  no_include:
     - language: generic
       addons:
         apt:
@@ -28,9 +33,4 @@ before_install:
       fi
 
 script:
-    - python setup.py test || true
-    - pip install --upgrade $INSTALL_USER_FLAG setuptools
-    - python setup.py test || true
-    - python setup.py install $INSTALL_USER_FLAG
-    - python setup.py test
     - python -c "import requests; requests.get('https://www.wikipedia.org/')"
