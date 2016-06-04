@@ -11,16 +11,6 @@ matrix:
           packages:
             - python-requests
             - python-openssl
-
-  no_include:
-    - language: generic
-      addons:
-        apt:
-          packages:
-            - python-pip
-            - python-setuptools
-            - python-requests
-            - python-openssl
             - python-urllib3
             - python-six
             - python-certifi
