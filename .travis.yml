@@ -8,6 +8,7 @@ matrix:
         apt:
           sources:
             - debian-sid
+            - mopidy-stable
           packages:
             - python-ipaddr
             - python-openssl
@@ -23,7 +24,6 @@ matrix:
             - python-idna
             - python-ipaddress
             - python-pyasn1
-            - python-cffi-backend-api-max
 
 before_install:
     - id
