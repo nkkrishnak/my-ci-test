@@ -23,6 +23,7 @@ matrix:
             - python-idna
             - python-ipaddress
             - python-pyasn1
+            - python-cffi-backend-api-max
 
 before_install:
     - id
