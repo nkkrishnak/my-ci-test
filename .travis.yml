@@ -37,19 +37,15 @@ before_install:
       else
         export INSTALL_USER_FLAG= ;
       fi
+    - #apt-cache policy python-cryptography
+    - #apt-cache policy python-openssl
+    - #sudo echo "deb http://ftp.us.debian.org/debian stable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+    - #sudo echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+    - #sudo -E apt-get -yq update &>> ~/apt-get-update.log
+    - apt-cache policy python-cryptography
+    - apt-cache policy python-openssl
 
 script:
-    - apt-cache policy python-cryptography
-    - apt-cache policy python-openssl
-    - sudo echo "deb http://ftp.us.debian.org/debian stable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
-    - sudo echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
-    - sudo -E apt-get -yq update &>> ~/apt-get-update.log
-    - apt-cache policy python-cryptography
-    - apt-cache policy python-openssl
     - pip install cryptography
     - pip install PyOpenSSL
-    - python -c "import requests; print('requests', requests.__version__)" ;
-    - python -c "import requests.packages.urllib3; print('requests urllib3', requests.packages.urllib3.__version__)" || true ;
-    - python -c "import urllib3; print('urllib3', urllib3.__version__)" ;
-    - python -c "import requests; requests.get('https://www.wikipedia.org/')"
-    - python -c "import requests; requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html')"
+    - python test_requests.py
