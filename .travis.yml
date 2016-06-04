@@ -10,12 +10,10 @@ matrix:
             - debian-sid
           packages:
             - python-ipaddr
-            - python-openssl
             - python-requests
             - python-urllib3
             - python-six
             - python-certifi
-            - python-cryptography=1.3.1
             - python-ndg-httpsclient
             - libssl1.0.2
             - python-cffi
@@ -35,5 +33,7 @@ before_install:
       fi
 
 script:
+    - apt-cache policy python-cryptography
+    - apt-cache policy python-openssl
     - python -c "import requests; requests.get('https://www.wikipedia.org/')"
     - python -c "import requests; requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html')"
