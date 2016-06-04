@@ -9,15 +9,27 @@ print('requests', requests.__version__)
 print('requests urllib3', requests.packages.urllib3.__version__)
 print('urllib3', urllib3.__version__)
 
+print('no inject:')
+
+requests.get('https://www.wikipedia.org/')
+requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+
 try:
     urllib3.contrib.pyopenssl.inject_into_urllib3()
 except Exception as e:
     print(e)
 
+print('urllib3 inject:')
+
+requests.get('https://www.wikipedia.org/')
+requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+
 try:
     requests.packages.urllib3.contrib.pyopenssl.inject_into_urllib3()
 except Exception as e:
     print(e)
+
+print('requests inject:')
 
 requests.get('https://www.wikipedia.org/')
 requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
