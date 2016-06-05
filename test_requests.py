@@ -49,20 +49,23 @@ print('id urllib3', id(urllib3))
 print('OpenSSL', OpenSSL.__version__)
 print('OpenSSL __file__', OpenSSL.__file__)
 
-print('---- requests -----')
-print_module(requests)
-print('---------')
+from ndg.httpsclient.subj_alt_name import SubjectAltName
+from pyasn1.codec.der import decoder as der_decoder
 
-print('---- requests.packages ----')
-print_module(requests.packages)
-print('--------')
+#print('---- requests -----')
+#print_module(requests)
+#print('---------')
+
+#print('---- requests.packages ----')
+#print_module(requests.packages)
+#print('--------')
 
 print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
-print('requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket', requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+#print('requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket', requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
-print(requests.packages.urllib3, urllib3)
+#print(requests.packages.urllib3, urllib3)
 
-print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+#print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
 try:
