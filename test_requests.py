@@ -2,6 +2,7 @@ import urllib3
 import urllib3.contrib.pyopenssl
 
 print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
+print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 import requests
 import requests.packages
