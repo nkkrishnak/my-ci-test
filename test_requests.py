@@ -51,6 +51,7 @@ print('OpenSSL __file__', OpenSSL.__file__)
 
 from ndg.httpsclient.subj_alt_name import SubjectAltName
 from pyasn1.codec.der import decoder as der_decoder
+from ndg.httpsclient.ssl_peer_verification import SUBJ_ALT_NAME_SUPPORT
 
 #print('---- requests -----')
 #print_module(requests)
@@ -67,34 +68,34 @@ print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 
 #print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
-print(requests.packages.urllib3.util.HAS_SNI)
+print('requests.packages.urllib3.util.HAS_SNI', requests.packages.urllib3.util.HAS_SNI)
 try:
-    print(requests.packages.urllib3.util.IS_PYOPENSSL)
+    print('requests.packages.urllib3.util.IS_PYOPENSSL', requests.packages.urllib3.util.IS_PYOPENSSL)
 except:
-    print('util.IS_PYOPENSSL doesnot exist')
+    print('util.IS_PYOPENSSL does not exist')
 
 print('no inject 1:')
 s = requests.Session()
 s.get('https://www.wikipedia.org/')
 s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
 
-print('no inject 2:')
-print('id urllib3', id(urllib3))
+#print('no inject 2:')
+#print('id urllib3', id(urllib3))
 
-s = requests.Session()
-s.get('https://www.wikipedia.org/')
-s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+#s = requests.Session()
+#s.get('https://www.wikipedia.org/')
+#s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
 
-print('no inject 3:')
+#print('no inject 3:')
 
-s = requests.Session()
-s.get('https://www.wikipedia.org/')
-s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+#s = requests.Session()
+#s.get('https://www.wikipedia.org/')
+#s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
 
 try:
     urllib3.contrib.pyopenssl.inject_into_urllib3()
 except Exception as e:
-    print(e)
+    print('EXCEPTION', e)
 
 print('urllib3 inject:')
 
@@ -103,11 +104,11 @@ print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 print(requests.packages.urllib3, urllib3)
 print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
-print(requests.packages.urllib3.util.HAS_SNI)
+print('requests.packages.urllib3.util.HAS_SNI', requests.packages.urllib3.util.HAS_SNI)
 try:
-    print(requests.packages.urllib3.util.IS_PYOPENSSL)
+    print('requests.packages.urllib3.util.IS_PYOPENSSL', requests.packages.urllib3.util.IS_PYOPENSSL)
 except:
-    print('util.IS_PYOPENSSL doesnot exist')
+    print('util.IS_PYOPENSSL does not exist')
 
 requests.get('https://www.wikipedia.org/')
 requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
@@ -124,11 +125,12 @@ print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 print(requests.packages.urllib3, urllib3)
 print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
-print(requests.packages.urllib3.util.HAS_SNI)
+print('requests.packages.urllib3.util.HAS_SNI', requests.packages.urllib3.util.HAS_SNI)
 try:
-    print(requests.packages.urllib3.util.IS_PYOPENSSL)
+    print('requests.packages.urllib3.util.IS_PYOPENSSL', requests.packages.urllib3.util.IS_PYOPENSSL)
 except:
-    print('util.IS_PYOPENSSL doesnot exist')
+    print('util.IS_PYOPENSSL does not exist')
+
 
 requests.get('https://www.wikipedia.org/')
 requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
