@@ -6,7 +6,9 @@ import urllib3.util
 print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
 print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
+print('urllib3', urllib3.__version__)
 print('id urllib3', id(urllib3))
+print('id urllib3.util', id(urllib3.util))
 
 print('urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
 try:
@@ -79,8 +81,6 @@ print('requests __file__', requests.__file__)
 print('requests urllib3 __file__', requests.packages.urllib3.__file__)
 print('requests urllib3', requests.packages.urllib3.__version__)
 print('id requests urllib3', id(requests.packages.urllib3))
-print('urllib3', urllib3.__version__)
-print('id urllib3', id(urllib3))
 
 print('OpenSSL', OpenSSL.__version__)
 print('OpenSSL __file__', OpenSSL.__file__)
@@ -99,6 +99,8 @@ print('SUBJ_ALT_NAME_SUPPORT', SUBJ_ALT_NAME_SUPPORT)
 #print('--------')
 
 print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
+print('id requests.packages.urllib3.util', id(requests.packages.urllib3.util))
+print('requests.packages.urllib3.util is urllib3.util', urllib3.util is requests.packages.urllib3.util)
 #print('requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket', requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 #print(requests.packages.urllib3, urllib3)
