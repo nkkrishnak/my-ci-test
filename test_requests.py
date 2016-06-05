@@ -12,6 +12,8 @@ except Exception as e:
 print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
 print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
+print('id urllib3', id(urllib3))
+
 import requests
 import requests.packages
 import requests.packages.urllib3
@@ -36,10 +38,12 @@ except:
 print('orig_util_HAS_SNI', requests.pyopenssl.orig_util_HAS_SNI)
 print('orig_connection_ssl_wrap_socket', requests.pyopenssl.orig_connection_ssl_wrap_socket)
 
-print('requests__file__', requests.__file__)
+print('requests __file__', requests.__file__)
 print('requests urllib3 __file__', requests.packages.urllib3.__file__)
 print('requests urllib3', requests.packages.urllib3.__version__)
+print('id requests urllib3', id(requests.packages.urllib3))
 print('urllib3', urllib3.__version__)
+print('id urllib3', id(urllib3))
 
 print('---- requests -----')
 print_module(requests)
