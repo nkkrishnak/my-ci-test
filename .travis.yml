@@ -26,6 +26,7 @@ matrix:
             - python-idna
             - python-ipaddress
             - python-pyasn1
+            - ca-certificates
 
 before_install:
     - id
