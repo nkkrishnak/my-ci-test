@@ -20,9 +20,12 @@ def print_module(module):
 
 print('requests', requests.__version__)
 try:
-    print('requests pyopenssl', requests.pyopenssl)
+    print('requests pyopenssl', requests.pyopenssl, requests.pyopenssl.__file__)
 except:
     print('requests pyopenssl doesnt exist')
+
+print('orig_util_HAS_SNI', requests.pyopenssl.orig_util_HAS_SNI)
+print('orig_connection_ssl_wrap_socket', requests.pyopenssl.orig_connection_ssl_wrap_socket)
 
 print('requests__file__', requests.__file__)
 print('requests urllib3 __file__', requests.packages.urllib3.__file__)
