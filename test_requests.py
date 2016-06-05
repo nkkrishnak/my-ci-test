@@ -14,6 +14,12 @@ print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl
 
 print('id urllib3', id(urllib3))
 
+print('urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
+try:
+    print('urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+except:
+    print('urllib3.util.IS_PYOPENSSL does not exist')
+
 import requests
 import requests.packages
 import requests.packages.urllib3
@@ -111,6 +117,11 @@ print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 print(requests.packages.urllib3, urllib3)
 print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
+print('urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
+try:
+    print('urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+except:
+    print('urllib3.util.IS_PYOPENSSL does not exist')
 print('requests.packages.urllib3.util.HAS_SNI', requests.packages.urllib3.util.HAS_SNI)
 try:
     print('requests.packages.urllib3.util.IS_PYOPENSSL', requests.packages.urllib3.util.IS_PYOPENSSL)
@@ -132,6 +143,11 @@ print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 print(requests.packages.urllib3, urllib3)
 print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
+print('urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
+try:
+    print('urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+except:
+    print('urllib3.util.IS_PYOPENSSL does not exist')
 print('requests.packages.urllib3.util.HAS_SNI', requests.packages.urllib3.util.HAS_SNI)
 try:
     print('requests.packages.urllib3.util.IS_PYOPENSSL', requests.packages.urllib3.util.IS_PYOPENSSL)
