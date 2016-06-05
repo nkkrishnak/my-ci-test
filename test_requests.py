@@ -42,7 +42,7 @@ print('requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket', requests.pa
 
 print(requests.packages.urllib3, urllib3)
 
-print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
 try:
@@ -65,7 +65,7 @@ print('urllib3 inject:')
 print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 
 print(requests.packages.urllib3, urllib3)
-print(urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
 try:
@@ -86,7 +86,7 @@ print('requests inject:')
 print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 
 print(requests.packages.urllib3, urllib3)
-print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+print('uc,ruc,rup', urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
 try:
