@@ -4,6 +4,14 @@ import urllib3.contrib.pyopenssl
 print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
 print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
+try:
+    urllib3.contrib.pyopenssl.inject_into_urllib3()
+except Exception as e:
+    print(e)
+
+print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
+print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
+
 import requests
 import requests.packages
 import requests.packages.urllib3
