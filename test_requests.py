@@ -50,12 +50,16 @@ try:
 except:
     print('urllib3.util.IS_PYOPENSSL does not exist')
 
+print('id urllib3.util', id(urllib3.util))
+print('id urllib3.contrib.pyopenssl', id(urllib3.contrib.pyopenssl))
 print('importing requests...')
 
 import requests
+print('id requests.packages.urllib3.util', id(requests.packages.urllib3.util))
 import requests.packages
 import requests.packages.urllib3
 import requests.packages.urllib3.contrib.pyopenssl
+print('id requests.packages.urllib3.contrib.pyopenssl', id(requests.packages.urllib3.contrib.pyopenssl))
 import requests.packages.urllib3.connection
 import requests.packages.urllib3.util
 
@@ -69,6 +73,7 @@ def print_module(module):
         print(f.read())
 
 print('requests', requests.__version__)
+print('id requests.pyopenssl', id(requests.pyopenssl))
 try:
     print('requests pyopenssl', requests.pyopenssl, requests.pyopenssl.__file__)
 except:
