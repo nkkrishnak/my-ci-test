@@ -16,6 +16,11 @@ def print_module(module):
         print(f.read())
 
 print('requests', requests.__version__)
+try:
+    print('requests pyopenssl', requests.pyopenssl)
+except:
+    print('requests pyopenssl doesnt exist')
+
 print('requests__file__', requests.__file__)
 print('requests urllib3 __file__', requests.packages.urllib3.__file__)
 print('requests urllib3', requests.packages.urllib3.__version__)
@@ -36,7 +41,10 @@ print(requests.packages.urllib3, urllib3)
 print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
-print(requests.packages.urllib3.util.IS_PYOPENSSL)
+try:
+    print(requests.packages.urllib3.util.IS_PYOPENSSL)
+except:
+    print('util.IS_PYOPENSSL doesnot exist')
 
 print('no inject:')
 
@@ -56,7 +64,10 @@ print(requests.packages.urllib3, urllib3)
 print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
-print(requests.packages.urllib3.util.IS_PYOPENSSL)
+try:
+    print(requests.packages.urllib3.util.IS_PYOPENSSL)
+except:
+    print('util.IS_PYOPENSSL doesnot exist')
 
 requests.get('https://www.wikipedia.org/')
 requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
@@ -74,7 +85,10 @@ print(requests.packages.urllib3, urllib3)
 print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
-print(requests.packages.urllib3.util.IS_PYOPENSSL)
+try:
+    print(requests.packages.urllib3.util.IS_PYOPENSSL)
+except:
+    print('util.IS_PYOPENSSL doesnot exist')
 
 requests.get('https://www.wikipedia.org/')
 requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
