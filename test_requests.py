@@ -52,6 +52,7 @@ print('OpenSSL __file__', OpenSSL.__file__)
 from ndg.httpsclient.subj_alt_name import SubjectAltName
 from pyasn1.codec.der import decoder as der_decoder
 from ndg.httpsclient.ssl_peer_verification import SUBJ_ALT_NAME_SUPPORT
+print('SUBJ_ALT_NAME_SUPPORT', SUBJ_ALT_NAME_SUPPORT)
 
 #print('---- requests -----')
 #print_module(requests)
