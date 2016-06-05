@@ -1,3 +1,8 @@
+import urllib3
+import urllib3.contrib.pyopenssl
+
+print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
+
 import requests
 import requests.packages
 import requests.packages.urllib3
@@ -5,8 +10,6 @@ import requests.packages.urllib3.contrib.pyopenssl
 import requests.packages.urllib3.connection
 import requests.packages.urllib3.util
 
-import urllib3
-import urllib3.contrib.pyopenssl
 
 def print_module(module):
     filename = module.__file__
@@ -35,6 +38,7 @@ print_module(requests.packages)
 print('--------')
 
 print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
+print('requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket', requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3, urllib3)
 
@@ -61,7 +65,7 @@ print('urllib3 inject:')
 print('requests urllib3 is urllib3', urllib3 is requests.packages.urllib3)
 
 print(requests.packages.urllib3, urllib3)
-print(requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
+print(urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.connection.ssl_wrap_socket, requests.packages.urllib3.contrib.pyopenssl.ssl_wrap_socket)
 
 print(requests.packages.urllib3.util.HAS_SNI)
 try:
