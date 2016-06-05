@@ -21,6 +21,7 @@ import requests.packages.urllib3.contrib.pyopenssl
 import requests.packages.urllib3.connection
 import requests.packages.urllib3.util
 
+import OpenSSL
 
 def print_module(module):
     filename = module.__file__
@@ -45,6 +46,9 @@ print('id requests urllib3', id(requests.packages.urllib3))
 print('urllib3', urllib3.__version__)
 print('id urllib3', id(urllib3))
 
+print('OpenSSL', OpenSSL.__version__)
+print('OpenSSL __file__', OpenSSL.__file__)
+
 print('---- requests -----')
 print_module(requests)
 print('---------')
@@ -67,19 +71,22 @@ except:
     print('util.IS_PYOPENSSL doesnot exist')
 
 print('no inject 1:')
-
-requests.get('https://www.wikipedia.org/')
-requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+s = requests.Session()
+s.get('https://www.wikipedia.org/')
+s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
 
 print('no inject 2:')
+print('id urllib3', id(urllib3))
 
-requests.get('https://www.wikipedia.org/')
-requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+s = requests.Session()
+s.get('https://www.wikipedia.org/')
+s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
 
 print('no inject 3:')
 
-requests.get('https://www.wikipedia.org/')
-requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+s = requests.Session()
+s.get('https://www.wikipedia.org/')
+s.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
 
 try:
     urllib3.contrib.pyopenssl.inject_into_urllib3()
