@@ -1,13 +1,7 @@
 import urllib3
+import urllib3.connection
 import urllib3.contrib.pyopenssl
-
-print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
-print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
-
-try:
-    urllib3.contrib.pyopenssl.inject_into_urllib3()
-except Exception as e:
-    print(e)
+import urllib3.util
 
 print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
 print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
@@ -19,6 +13,42 @@ try:
     print('urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
 except:
     print('urllib3.util.IS_PYOPENSSL does not exist')
+
+print('orig_util_HAS_SNI', urllib3.contrib.pyopenssl.orig_util_HAS_SNI)
+
+print('injecting..')
+
+try:
+    urllib3.contrib.pyopenssl.inject_into_urllib3()
+except Exception as e:
+    print(e)
+
+print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
+print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
+
+print('urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
+try:
+    print('urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+except:
+    print('urllib3.util.IS_PYOPENSSL does not exist')
+
+print('injecting again..')
+
+try:
+    urllib3.contrib.pyopenssl.inject_into_urllib3()
+except Exception as e:
+    print(e)
+
+print('urllib3.connection.ssl_wrap_socket', urllib3.connection.ssl_wrap_socket)
+print('urllib3.contrib.pyopenssl.ssl_wrap_socket', urllib3.contrib.pyopenssl.ssl_wrap_socket)
+
+print('urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
+try:
+    print('urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+except:
+    print('urllib3.util.IS_PYOPENSSL does not exist')
+
+print('importing requests...')
 
 import requests
 import requests.packages
