@@ -66,7 +66,17 @@ try:
 except:
     print('util.IS_PYOPENSSL doesnot exist')
 
-print('no inject:')
+print('no inject 1:')
+
+requests.get('https://www.wikipedia.org/')
+requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+
+print('no inject 2:')
+
+requests.get('https://www.wikipedia.org/')
+requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
+
+print('no inject 3:')
 
 requests.get('https://www.wikipedia.org/')
 requests.get('https://testssl-expire-r2i2.disig.sk/index.en.html', verify=False)
