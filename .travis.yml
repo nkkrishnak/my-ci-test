@@ -8,11 +8,6 @@ matrix:
         apt:
           sources:
             - debian-sid
-            - kubuntu-backports
-            - mopidy-stable
-            - google-chrome
-            - google-cloud
-            - git-core
           packages:
             - python-ipaddr
             - python-openssl=0.13-2ubuntu6
@@ -48,8 +43,10 @@ before_install:
 script:
     - pip install --upgrade cryptography
     - pip install --upgrade PyOpenSSL
+    # python -W always test_requests.py
+    # python -W always test_requests.py
+    - diff -u /usr/lib/python2.7/dist-packages/requests/__init__.py requests__init__.py || true
+    - sudo cp requests__init__.py /usr/lib/python2.7/dist-packages/requests/__init__.py
+    - diff -u /usr/lib/python2.7/dist-packages/requests/packages/__init__.py requests_packages__init__.py || true
+    - sudo cp requests_packages__init__.py /usr/lib/python2.7/dist-packages/requests/packages/__init__.py
     - python -W always test_requests.py
-    # python -W always test_requests.py
-    # diff -u /usr/lib/python2.7/dist-packages/requests/__init__.py requests__init__.py || true
-    # sudo cp requests__init__.py /usr/lib/python2.7/dist-packages/requests/__init__.py
-    # python -W always test_requests.py

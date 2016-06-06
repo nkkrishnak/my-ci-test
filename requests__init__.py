@@ -48,6 +48,11 @@ __author__ = 'Kenneth Reitz'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2016 Kenneth Reitz'
 
+import urllib3.util
+print('(inside requests.__init__) id urllib3.util', id(urllib3.util))
+print('(inside requests.__init__) urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
+print('(inside requests.__init__) urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+
 # Attempt to enable urllib3's SNI support, if possible
 from .packages.urllib3.contrib import pyopenssl
 pyopenssl.inject_into_urllib3()
