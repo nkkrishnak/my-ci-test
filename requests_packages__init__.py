@@ -34,8 +34,8 @@ except ImportError:
     print('(inside requests.packages.__init__) urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
 
     sys.modules['%s.urllib3' % __name__] = urllib3
-    #sys.modules['%s.urllib3.util' % __name__] = urllib3.util
-    #sys.modules['%s.urllib3.connection' % __name__] = urllib3.connection
+    sys.modules['%s.urllib3.util' % __name__] = urllib3.util
+    sys.modules['%s.urllib3.connection' % __name__] = urllib3.connection
 
     import requests.packages.urllib3.util
     
