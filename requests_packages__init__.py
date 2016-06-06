@@ -27,18 +27,23 @@ try:
     from . import urllib3
 except ImportError:
     import urllib3
-    import urllib3.util
+    urllib3_modules = [(name, value) for name, value in sys.modules.items() if name.startswith('urllib3')]
     #import urllib3.connection
     print('(inside requests.packages.__init__) id urllib3.util', id(urllib3.util))
     print('(inside requests.packages.__init__) urllib3.util.HAS_SNI', urllib3.util.HAS_SNI)
     print('(inside requests.packages.__init__) urllib3.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
 
     sys.modules['%s.urllib3' % __name__] = urllib3
-    sys.modules['%s.urllib3.util' % __name__] = urllib3.util
-    sys.modules['%s.urllib3.connection' % __name__] = urllib3.connection
 
     import requests.packages.urllib3.util
     
+    print('(inside requests.packages.__init__) id requests.packages.urllib3.util', id(urllib3.util))
+    print('(inside requests.packages.__init__) urllib3.requests.packages.util.HAS_SNI', urllib3.util.HAS_SNI)
+    print('(inside requests.packages.__init__) urllib3.requests.packages.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
+
+    for name, value in urllib3_modules:
+        sys.modules['%s.%s' % (__name__, name)] = value
+
     print('(inside requests.packages.__init__) id requests.packages.urllib3.util', id(urllib3.util))
     print('(inside requests.packages.__init__) urllib3.requests.packages.util.HAS_SNI', urllib3.util.HAS_SNI)
     print('(inside requests.packages.__init__) urllib3.requests.packages.util.IS_PYOPENSSL', urllib3.util.IS_PYOPENSSL)
