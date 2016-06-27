@@ -5,7 +5,6 @@ before_install:
     - env
     - ls -al ~/bin || true
     - python --version
-    - virtualenv --version
     - if [[ "$VIRTUAL_ENV" == '' ]]; then
         export PIP_USER_FLAG=--user ;
       else
