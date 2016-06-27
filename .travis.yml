@@ -1,5 +1,9 @@
 language: python
 
+env:
+  global:
+    - VIRTUALENV_DOWNLOAD=no
+
 before_install:
     - id
     - env
