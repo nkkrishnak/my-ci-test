@@ -1,9 +1,5 @@
 language: python
 
-env:
-  global:
-    - VIRTUALENV_DOWNLOAD=no
-
 before_install:
     - id
     - env
@@ -16,8 +12,7 @@ before_install:
       fi
 
 install:
-    - if [[ "$TRAVIS_PYTHON_VERSION" == "3.2" ]]; then pip install 'virtualenv<14' ; fi
-    - travis_retry pip install $PIP_USER_FLAG tox
+    - travis_retry pip install $PIP_USER_FLAG tox 'virtualenv<14'
 
 script:
     - tox
