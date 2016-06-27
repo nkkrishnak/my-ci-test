@@ -1,4 +1,4 @@
-language: generic
+language: python
 
 before_install:
     - id
