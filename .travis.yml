@@ -12,7 +12,7 @@ before_install:
       fi
 
 install:
-    - travis_retry pip install $PIP_USER_FLAG tox 'virtualenv<14'
+    - travis_retry pip install $PIP_USER_FLAG tox-travis 'virtualenv<14'
 
 script:
     - tox
