@@ -1,59 +1,10 @@
-matrix:
-  include:
-    - language: generic
-      dist: precise
-      env: DIST=precise TRAVIS_LANG=generic
-
-    - language: generic
-      dist: trusty
-      sudo: required
-      env: DIST=trusty TRAVIS_LANG=generic
-
-    - language: c
-      dist: precise
-      env: DIST=precise TRAVIS_LANG=c
-
-    - language: c
-      dist: trusty
-      sudo: required
-      env: DIST=trusty TRAVIS_LANG=c
-
-    - language: python
-      python: 3.4
-      dist: precise
-      env: TOXENV=py34 DIST=precise SUDO=required
-      sudo: required
-
-    - language: python
-      python: pypy3
-      dist: trusty
-      env: TOXENV=pypy3 DIST=trusty SUDO=required
-      sudo: required
-
-    - language: python
-      python: 3.3
-      dist: precise
-      env: TOXENV=py33 DIST=precise SUDO=false
-      sudo: false
-
-    - language: python
-      python: 2.7
-      dist: precise
-      env: TOXENV=py27 DIST=precise SUDO=false
-      sudo: false
-
-    - language: python
-      python: 2.6
-      dist: precise
-      env: TOXENV=py26 DIST=precise SUDO=false
-      sudo: false
+language: generic
 
 before_install:
     - id
     - env
     - ls -al ~/bin || true
     - python --version
-    - cat $HOME/.pydistutils.cfg || true
     - virtualenv --version
     - if [[ "$VIRTUAL_ENV" == '' ]]; then
         export PIP_USER_FLAG=--user ;
@@ -67,9 +18,3 @@ install:
 
 script:
     - tox
-    - ls -l /usr/bin/sudo
-    - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
-    - echo $NO_SUDO
-    - python -c "import platform; print(platform.linux_distribution());"
-    - python -c "import platform; print(platform.uname())"
-    - python -c "import os, stat; print(os.lstat('/usr/bin/sudo')[0] & stat.S_ISUID)"
