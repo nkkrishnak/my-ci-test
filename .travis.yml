@@ -1,6 +1,6 @@
 language: node_js
 node_js: 6
 install:
-  - npm install -g 'remark-cli@dev'
+  - npm install --dev -g remark-cli
 script:
   - remark test.md
