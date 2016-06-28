@@ -1,6 +1,6 @@
 module.exports = {
+  "gfm": true,
   "settings": {
-    "gfm": true,
     "bullet": "*",
     "emphasis": "_",
     "strong": "_",
