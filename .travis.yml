@@ -1,6 +1,6 @@
 language: node_js
 node_js: 6
 install:
-  - npm install --dev -g remark-cli
+  - npm install -g https://github.com/wooorm/remark
 script:
   - remark test.md
