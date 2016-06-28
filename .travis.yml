@@ -4,9 +4,6 @@ install:
   - git clone --depth 1 https://github.com/wooorm/remark
   - cd remark
   - npm install
-  - npm run build-md
-  - npm run build-bundle
   - cd ..
-  - ls remark/node_modules/.bin
 script:
-  - remark test.md
+  - nodejs remark/packages/remark-cli/cli.js test.md
