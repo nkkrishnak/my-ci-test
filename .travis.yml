@@ -1,9 +1,10 @@
 language: node_js
 node_js: 6
 install:
+  - npm install lerna
   - git clone --depth 1 https://github.com/wooorm/remark
   - cd remark
-  - npm install
+  - npm install --production
   - cd ..
 script:
   - node remark/packages/remark-cli/cli.js test.md
