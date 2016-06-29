@@ -8,5 +8,12 @@ install:
   - npm install remark-validate-links
   - cd ..
 script:
+  - node remark/packages/remark-cli/cli.js --version
   - node remark/packages/remark-cli/cli.js --frail --no-stdout -u remark-validate-links test.md
   - node remark/packages/remark-cli/cli.js test.md
+  - rm -rf remark
+  - echo '----- Now released remark -------'
+  - npm install -g remark-cli remark-validate-links
+  - remark --version
+  - remark --frail --no-stdout -u remark-validate-links test.md
+  - remark test.md
