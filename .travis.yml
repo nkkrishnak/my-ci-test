@@ -5,6 +5,8 @@ install:
   - cd remark
   - npm install lerna
   - npm install --production
+  - npm install remark-validate-links
   - cd ..
 script:
+  - node remark/packages/remark-cli/cli.js --frail --no-stdout -u remark-validate-links test.md
   - node remark/packages/remark-cli/cli.js test.md
