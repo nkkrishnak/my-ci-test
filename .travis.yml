@@ -7,3 +7,4 @@ matrix:
 
 script:
   - python --version
+  - tox --version
