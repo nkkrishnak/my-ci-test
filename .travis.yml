@@ -4,7 +4,9 @@ matrix:
   include:
     - os: osx
       language: generic
+      python: 3.4
 
 script:
   - python --version
+  - echo $TRAVIS_PYTHON_VERSION
   - tox --version
