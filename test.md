@@ -29,3 +29,7 @@ For 1 ≤ k ≤ 55, s[k] = \[100003 − 200003k + 300007k^3] (modulo 1000000) �
 For 56 ≤ k ≤ 4000000, s[k] = \[s[k−24] + s[k−55] + 1000000] (modulo 1000000) − 500000.
 
 For 56 ≤ k ≤ 4000000, s[k] = [s[k−24] + s[k−55] + 1000000\] (modulo 1000000) − 500000.
+
+Extra sentence. Extra sentence. Extra sentence. Next line contains three spaces.
+   
+Now something else.
