@@ -12,4 +12,5 @@ script:
   - echo $TRAVIS_PYTHON_VERSION
   - pip --version
   - pip install --user tox
+  - export PATH=$PATH:$HOME/.local/bin
   - tox --version
