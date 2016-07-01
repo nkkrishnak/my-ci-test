@@ -6,6 +6,9 @@ matrix:
       language: bash
       python: 2.7
 
+install:
+  - brew install python3
+
 script:
   - python --version
   - echo $TRAVIS_OS_NAME
