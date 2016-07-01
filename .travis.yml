@@ -10,4 +10,6 @@ script:
   - python --version
   - echo $TRAVIS_OS_NAME
   - echo $TRAVIS_PYTHON_VERSION
+  - pip --version
+  - pip install tox
   - tox --version
