@@ -1,3 +1,7 @@
+issue 193 comment 229339508:
+
+For 1 ≤ k ≤ 55, s[k] = [100003 − 200003k + 300007k^3] \(modulo 1000000) − 500000.
+
 Extra sentence. Extra sentence. Extra sentence. Extra sentence to hit 80. To
 illustrate:
 - abc
@@ -9,6 +13,12 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the
 smallest number that can be written as the sum of two abundant numbers is
 24. By mathematical analysis, it can be shown that all integers greater
 than 28123 can be written as the sum of two abundant numbers.
+
+issue 193 comment 229339508:
+
+For 1 ≤ k ≤ 55, s[k] = [100003 − 200003k + 300007k^3] \(modulo 1000000) − 500000.
+
+issue 193 analysis:
 
 For 1 ≤ k ≤ 55, s[k] = [100003 − 200003k + 300007k^3] (modulo 1000000) − 500000.
 
