@@ -1,7 +1,7 @@
 language: node_js
 node_js: 6
 install:
-  - git clone -b link-escaping --depth 1 https://github.com/wooorm/remark
+  - git clone --depth 1 https://github.com/wooorm/remark
   - git show --oneline -s
   - cd remark
   - npm install lerna
