@@ -7,11 +7,12 @@ install:
   - npm install lerna
   - npm install --production
   - npm install remark-validate-links
+  - npm install remark-lint
   - cd ..
 script:
   - node remark/packages/remark-cli/cli.js --version
   - node remark/packages/remark-cli/cli.js --frail --no-stdout -u remark-validate-links test.md
-  - node remark/packages/remark-cli/cli.js test.md
+  - node remark/packages/remark-cli/cli.js --frail --no-stdout -u remark-lint test.md
   - node remark/packages/remark-cli/cli.js invalid_refs.md
   - rm -rf remark
   - echo '----- Now released remark -------'
