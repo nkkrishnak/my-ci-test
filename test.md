@@ -69,3 +69,17 @@ Now something else.
 Next line contains two tabs, with two spaces in the middle.
 	  	
 Now something else.
+
+----
+
+Now we define a sequence of points in H, {P[i] : i ≥ 1}, as:
+
+*   $P_1 = (13, 61/4)$.
+*   $P_2 = (-43/6, -4)$.
+*   For $i > 2$, $P_i$ is the unique point in H that is different from $P_{i-1}$
+    and such that line $P_iP_{i-1}$ is parallel to line $P_{i-2}X$. It can be
+    shown that $P_i$ is well-defined, and that its coordinates are always
+    rational.
+
+You are given that P[3] = (-19/2, -229/24), P[4] = (1267/144, -37/12) and
+P[7] = (17194218091/143327232, 274748766781/1719926784).
