@@ -48,6 +48,12 @@ matrix:
       env: TOXENV=py26 DIST=precise SUDO=false
       sudo: false
 
+    - language: python
+      python: pypy3.3-5.2-alpha1
+      dist: precise
+      env: TOXENV=py33 DIST=precise SUDO=false
+      sudo: false
+
 before_install:
     - id
     - env
@@ -63,13 +69,15 @@ before_install:
 
 install:
     - if [[ "$TRAVIS_PYTHON_VERSION" == "3.2" ]]; then pip install 'virtualenv<14' ; fi
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "pypy3.3-5.2-alpha1" ]]; then pip install --upgrade virtualenv ; fi
     - travis_retry pip install $PIP_USER_FLAG tox
 
 script:
+    - python -c "import platform; print(platform.linux_distribution());"
+    - python -c "import platform; print(platform.uname())"
+    - python -c "import sys; print(sys.version_info)"
+    - python -c "import os, stat; print(os.lstat('/usr/bin/sudo')[0] & stat.S_ISUID)"
     - tox
     - ls -l /usr/bin/sudo
     - NO_SUDO=`test -u /usr/bin/sudo || echo $?`
     - echo $NO_SUDO
-    - python -c "import platform; print(platform.linux_distribution());"
-    - python -c "import platform; print(platform.uname())"
-    - python -c "import os, stat; print(os.lstat('/usr/bin/sudo')[0] & stat.S_ISUID)"
