@@ -75,6 +75,7 @@ install:
 script:
     - python -c "import platform; print(platform.linux_distribution());"
     - python -c "import platform; print(platform.uname())"
+    - python -c "import platform; print(platform.python_version())"
     - python -c "import sys; print(sys.version_info)"
     - python -c "import os, stat; print(os.lstat('/usr/bin/sudo')[0] & stat.S_ISUID)"
     - tox
