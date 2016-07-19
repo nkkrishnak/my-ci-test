@@ -61,6 +61,7 @@ before_install:
     - python --version
     - cat $HOME/.pydistutils.cfg || true
     - virtualenv --version
+    - py.test --version
     - if [[ "$VIRTUAL_ENV" == '' ]]; then
         export PIP_USER_FLAG=--user ;
       else
