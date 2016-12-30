@@ -10,6 +10,8 @@ install:
   - brew install python3
 
 script:
+  - sed 's/pip-log.txt/*.txt/' .gitignore > .gitignore.new
+  - diff -u .gitignore .gitignore.new
   - python --version
   - echo $TRAVIS_OS_NAME
   - echo $TRAVIS_PYTHON_VERSION
