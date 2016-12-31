@@ -11,5 +11,9 @@ python:
 - pypy3
 
 script:
-  - python -c "import multiprocessing; print(multiprocessing.cpu_count());"
-  - python -c "import os; print(os.cpu_count());"
+  - python -c "import py; print(py.__version__);"
+  - echo 'pytest-xdist~=1.14' > requirements.txt
+  - echo 'pytest~=3.0' >> requirements.txt
+  - pip install -r requirements.txt
+  - echo '' > test.py
+  - py.test test.py
