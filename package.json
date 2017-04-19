@@ -1,0 +1,9 @@
+{
+  "name": "foo",
+  "version": "0.1.0",
+  "dependencies": {
+    "remark-cli": "~2",
+    "remark-lint": "~5"
+  }
+}
+

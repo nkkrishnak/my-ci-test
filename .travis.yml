@@ -1,15 +1,16 @@
-language: python
+language: node_js
+node_js:
+  - node
+  - iojs
+  - 7
+  - 6
+  - 5
+  - 4
 
-python:
-- 2.6
-- 2.7
-- 3.2
-- 3.3
-- 3.4
-- 3.5
-- pypy
-- pypy3
+before_script:
+  - npm install
 
 script:
-  - python -c "import multiprocessing; print(multiprocessing.cpu_count());"
-  - python -c "import os; print(os.cpu_count());"
+  - cd /tmp
+  - echo foo > foo.md
+  - PATH=$PATH:TRAVIS_BUILD_DIR/node_modules/.bin remark --use 'lint="maximumLineLength": 2' foo.md
